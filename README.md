@@ -1,10 +1,10 @@
 # Mandeep Singh #BlackLivesMatter
 Hi, I'm Mandeep (he/him)—a freelance fullstack developer.
 
-❯ 😎 FullStack Developer<br>
-❯ 📦 Vue.js & Laravel Expert<br>
-❯ Specialize in Startup Ecosystem 🔥<br>
-❯ Trying out 🏖 JAMStack & 🦕 Deno<br>
+- 😎 FullStack Developer
+- 📦 Vue.js & Laravel Expert
+- Specialize in Startup Ecosystem 🔥
+- Trying out 🏖 JAMStack & 🦕 Deno
 
 ## My side projects
 - 💩 Figure out ways to fix GIT screw-ups - https://git.wtf
