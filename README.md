@@ -1,4 +1,4 @@
-<img src="https://media.licdn.com/dms/image/v2/D5616AQEwf7bmTDVIfg/profile-displaybackgroundimage-shrink_350_1400/B56ZZSxiffGcAY-/0/1745145445203?e=1750896000&v=beta&t=YBvSRt-6RiSdiY6_Nd5A-RpAufahjJSwRs9fjbSTH5Q" alt="banner that says Mandeep Singh - Full Stack Engineer specialized in End-to-End Product Development. Stack specialization in Vuejs, Nodejs, Laravel, Automation, UI/UX, JamStack & Deno">
+<img src="banner.png" alt="banner that says Mandeep Singh - Full Stack Engineer specialized in End-to-End Product Development. Stack specialization in Vuejs, Nodejs, Laravel, Automation, UI/UX, JamStack & Deno">
 
 [![Website Badge](https://img.shields.io/badge/Website-Personal-informational?style=flat&logo=starship&logoColor=white&color=1CA2F1)](https://www.msingh.com/)
 [![Twitter Badge](https://img.shields.io/badge/Twitter-Profile-informational?style=flat&logo=twitter&logoColor=white&color=1CA2F1)](https://twitter.com/meSingh9)
@@ -34,16 +34,16 @@ You can explore more about me, my work, and book a call via [msingh.com](https:/
 ### 🧠 Core Skills
 
 **Languages & Frameworks**  
-`JavaScript` • `TypeScript` • `PHP` • `Node.js` • `Vue.js` • `React` • `Laravel` • `Express` • `Nuxt` • `Deno` • `TailwindCSS` • `Python` • `Golang`
+`JavaScript` • `TypeScript` • `PHP` • `Node.js` • `Vue.js` • `React` • `Laravel` • `Express` • `Nuxt` • `Deno` • `TailwindCSS` • `Python`
 
 **Backend & DevOps**  
-`MongoDB` • `MySQL` • `PostgreSQL` • `Redis` • `Docker` • `CI/CD` • `Serverless` • `GraphQL` • `REST APIs` • `gRPC` • `Ansible` • `Load Testing` • `Cloud Cost Optimization`
+`MongoDB` • `MySQL` • `PostgreSQL` • `Redis` • `Docker` • `Serverless` • `GraphQL` • `REST APIs` • `gRPC` • `Load Testing` • `Cloud Cost Optimization`
 
 **AI/ML & Infra**  
 `LLMs` • `LLMOps` • `Prompt Engineering` • `Hybrid Cloud` • `AWS` • `GCP` • `Cloudflare` • `WebSockets` • `Multilingual Systems`
 
 **Other Goodies**  
-`JAMStack` • `Microservices` • `Performance Tuning` • `Security Best Practices`
+`JAMStack` • `Microservices` • `Performance Tuning` • `Security Best Practices` • `SaaS Platforms` • `OpenAPI`
 
 ---
 
