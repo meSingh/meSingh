@@ -23,6 +23,7 @@ jobs:
       - name: Fetch live GitHub numbers
         run: node scripts/fetch.mjs
         env:
+          PROFILE_TOKEN: ${{ secrets.PROFILE_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate the banner
         run: node scripts/generate.mjs
@@ -31,7 +32,7 @@ jobs:
       - name: Summary cards, light theme (vn7n24fzkq/github-profile-summary-cards)
         uses: vn7n24fzkq/github-profile-summary-cards@release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
         with:
           USERNAME: meSingh
           THEME: default
@@ -42,7 +43,7 @@ jobs:
       - name: Summary cards, dark theme
         uses: vn7n24fzkq/github-profile-summary-cards@release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
         with:
           USERNAME: meSingh
           THEME: github_dark
