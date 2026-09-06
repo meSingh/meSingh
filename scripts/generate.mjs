@@ -2,8 +2,8 @@
 // GitHub renders README SVGs inside <img>: no scripts, no external fetches, but CSS keyframes, SMIL
 // and @font-face data URIs all work. Everything below is self-contained.
 //
-// Two images: the ink banner (the profile's header image) and the Still running card, drawn in the
-// github-readme-stats house style at the streak card's width. Everything else is native markdown or a
+// Two images: the ink banner (the profile's header image) and the Still running box, drawn with GitHub's own
+// Primer colours and geometry so it reads as part of the page. Everything else is native markdown or a
 // default card from the standard tools.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
@@ -108,42 +108,62 @@ function hero(T) {
 
 
 
-// ---------- 2. "Still running" card, in github-readme-stats' own look (default / github_dark) ----------
-// 896 px wide, the same as the streak card (card_width=896), so the two read as one set.
-const GRS_DEFAULT = { title: '#2f80ed', icon: '#4c71f2', text: '#434d58', bg: '#fffefe', border: '#e4e2e2' };
-const GRS_DARK = { title: '#58a6ff', icon: '#1f6feb', text: '#c9d1d9', bg: '#0d1117', border: '#30363d' };
-const GRS_FONT = `'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif`;
+// ---------- 2. "Still running": a Primer-style box, like GitHub's own status-checks list ----------
+// Colours and geometry from GitHub's Primer design system (Box, Box-header, Box-row, octicons), so it reads
+// as part of GitHub rather than as a third-party card.
+const PRIMER_LIGHT = { bg: '#ffffff', header: '#f6f8fa', border: '#d0d7de', text: '#1f2328', muted: '#57606a', green: '#1a7f37', blue: '#0969da', accentBg: '#dafbe1' };
+const PRIMER_DARK  = { bg: '#0d1117', header: '#161b22', border: '#30363d', text: '#e6edf3', muted: '#8b949e', green: '#3fb950', blue: '#58a6ff', accentBg: '#12261e' };
+const PRIMER_FONT = `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif`;
 const OCT = {
-  people: 'M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z',
-  clock: 'M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z',
-  commit: 'M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z',
+  checkFill: 'M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z',
+  dotFill: 'M8 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z',
   pulse: 'M6 2c.306 0 .582.187.696.471L10 10.731l1.304-3.26A.751.751 0 0 1 12 7h3.25a.75.75 0 0 1 0 1.5h-2.742l-1.812 4.528a.751.751 0 0 1-1.392 0L6 4.77 4.696 8.03A.75.75 0 0 1 4 8.5H.75a.75.75 0 0 1 0-1.5h2.742l1.812-4.529A.751.751 0 0 1 6 2Z',
+  rocket: 'M14.064 0h.186C15.216 0 16 .784 16 1.75v.186a8.752 8.752 0 0 1-2.564 6.186l-.458.459c-.314.314-.641.616-.979.904v3.207c0 .608-.315 1.172-.833 1.49l-2.774 1.707a.749.749 0 0 1-1.11-.418l-.954-3.102a1.214 1.214 0 0 1-.145-.125L3.754 9.816a1.218 1.218 0 0 1-.124-.145L.528 8.717a.749.749 0 0 1-.418-1.11l1.71-2.774A1.748 1.748 0 0 1 3.31 4h3.204c.288-.338.59-.665.904-.979l.459-.458A8.749 8.749 0 0 1 14.064 0ZM8.938 3.623h-.002l-.458.458c-.76.76-1.437 1.598-2.02 2.5l-1.5 2.317 2.143 2.143 2.317-1.5c.902-.583 1.74-1.26 2.499-2.02l.459-.458a7.25 7.25 0 0 0 2.123-5.127V1.75a.25.25 0 0 0-.25-.25h-.186a7.249 7.249 0 0 0-5.125 2.123ZM3.56 14.56c-.732.732-2.334 1.045-3.005 1.148a.234.234 0 0 1-.201-.064.234.234 0 0 1-.064-.201c.103-.671.416-2.273 1.15-3.003a1.502 1.502 0 1 1 2.12 2.12Zm6.94-3.935c-.088.06-.177.118-.266.175l-2.35 1.521.548 1.783 1.949-1.2a.25.25 0 0 0 .119-.213ZM3.678 8.116 5.2 5.766c.058-.09.117-.178.176-.266H3.309a.25.25 0 0 0-.213.119l-1.2 1.95ZM12 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z',
 };
-function stillRunning(G) {
+function stillRunning(P) {
   const role = facts.now.find(n => n.count);
-  const dur = (since) => { const e = elapsed(since); return `${e.y} yrs ${e.m} mos in production`; };
   const month = (s) => ym(s).toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+  const dur = (since) => { const e = elapsed(since); return `${e.y} yr${e.y === 1 ? '' : 's'} ${e.m} mo${e.m === 1 ? '' : 's'}`; };
   const rows = [
-    ['people', role.v, `day ${daysSince(role.since).toLocaleString('en-US')} · since ${month(role.since)}`],
-    ...facts.still_running.map(r => ['clock', r.what, dur(r.since)]),
-    ['commit', 'Contributions, last year', gh.contributions.toLocaleString('en-US')],
+    ...facts.still_running.map(r => ({ icon: 'checkFill', color: P.green, name: r.what, note: r.detail, right: `Active · ${dur(r.since)}`, since: `since ${month(r.since)}` })),
+    { icon: 'rocket', color: P.blue, name: role.v, note: 'current engagement', right: `Day ${daysSince(role.since).toLocaleString('en-US')}`, since: `since ${month(role.since)}` },
   ];
-  const w = 896, h = 55 + rows.length * 25 + 20;
+  const w = 896, headerH = 44, rowH = 52, footerH = 40;
+  const h = headerH + rows.length * rowH + footerH;
   let body = `<style>
-  .header { font: 600 18px ${GRS_FONT}; fill: ${G.title} }
-  .stat { font: 600 14px ${GRS_FONT}; fill: ${G.text} }
-  .gray { font: 400 11px ${GRS_FONT}; fill: ${G.text}; opacity: .7 }
-  .icon { fill: ${G.icon} }
+  text { font-family: ${PRIMER_FONT}; }
+  .h { font-size: 14px; font-weight: 600; fill: ${P.text} }
+  .hm { font-size: 12px; fill: ${P.muted} }
+  .name { font-size: 14px; font-weight: 600; fill: ${P.text} }
+  .note { font-size: 12px; fill: ${P.muted} }
+  .right { font-size: 13px; font-weight: 600; fill: ${P.text} }
+  .since { font-size: 12px; fill: ${P.muted} }
 </style>
-<rect x="0.5" y="0.5" rx="4.5" width="${w - 1}" height="${h - 1}" stroke="${G.border}" fill="${G.bg}"/>
-<g transform="translate(25, 35)"><svg class="icon" x="0" y="-14" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.pulse}"/></svg><text x="25" y="0" class="header">Still running</text><text x="${w - 25}" y="0" text-anchor="end" class="gray">updated ${esc(gh.fetched)}</text></g>
-<g transform="translate(0, 55)">`;
-  rows.forEach(([ic, label, value], i) => {
-    body += `\n  <g transform="translate(25, ${i * 25})"><svg class="icon" viewBox="0 0 16 16" width="16" height="16" x="0" y="-1"><path fill-rule="evenodd" d="${OCT[ic]}"/></svg><text class="stat" x="25" y="12.5">${esc(label)}</text><text class="stat" x="${w - 25}" y="12.5" text-anchor="end">${esc(value)}</text></g>`;
+<rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="6" fill="${P.bg}" stroke="${P.border}"/>
+<path d="M0.5 6.5a6 6 0 0 1 6-6h${w - 13}a6 6 0 0 1 6 6v${headerH - 6.5}h-${w - 1}z" fill="${P.header}"/>
+<line x1="0.5" y1="${headerH}" x2="${w - .5}" y2="${headerH}" stroke="${P.border}"/>
+<g transform="translate(16, ${headerH / 2 - 8})"><path fill="${P.muted}" d="${OCT.pulse}"/></g>
+<text x="40" y="${headerH / 2 + 5}" class="h">Still running</text>
+<text x="${w - 16}" y="${headerH / 2 + 5}" text-anchor="end" class="hm">${rows.length} systems · updated ${esc(gh.fetched)}</text>`;
+  rows.forEach((r, i) => {
+    const y = headerH + i * rowH;
+    body += `
+<g transform="translate(0, ${y})">
+  ${i ? `<line x1="0.5" y1="0" x2="${w - .5}" y2="0" stroke="${P.border}"/>` : ''}
+  <g transform="translate(16, ${rowH / 2 - 8})"><path fill="${r.color}" d="${OCT[r.icon]}"/></g>
+  <text x="44" y="${rowH / 2 - 2}" class="name">${esc(r.name)}</text>
+  <text x="44" y="${rowH / 2 + 15}" class="note">${esc(r.note)}</text>
+  <text x="${w - 16}" y="${rowH / 2 - 2}" text-anchor="end" class="right" fill="${r.color}">${esc(r.right)}</text>
+  <text x="${w - 16}" y="${rowH / 2 + 15}" text-anchor="end" class="since">${esc(r.since)}</text>
+</g>`;
   });
-  body += '\n</g>';
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" fill="none" role="img" aria-labelledby="titleId">
-<title id="titleId">Still running: ${esc(rows.map(r => `${r[1]} ${r[2]}`).join('; '))}</title>
+  const fy = headerH + rows.length * rowH;
+  body += `
+<line x1="0.5" y1="${fy}" x2="${w - .5}" y2="${fy}" stroke="${P.border}"/>
+<text x="16" y="${fy + footerH / 2 + 4}" class="note"><tspan class="right" fill="${P.text}">${gh.contributions.toLocaleString('en-US')}</tspan> contributions in the last year${gh.scope === 'public' && gh.privateContributions > 0 ? ` · ${Math.round(gh.privateContributions / gh.contributions * 100)}% in private repositories` : ''}</text>
+<text x="${w - 16}" y="${fy + footerH / 2 + 4}" text-anchor="end" class="note">The integrations core built at Shiprocket in 2016 is still the hub today.</text>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="titleId">
+<title id="titleId">Still running: ${esc(rows.map(r => `${r.name}, ${r.right}`).join('; '))}</title>
 ${body}
 </svg>
 `;
@@ -153,7 +173,7 @@ ${body}
 mkdirSync('assets', { recursive: true });
 const out = {
   'hero': hero(INK), 'hero-dark': hero(INK_ON_DARK),
-  'still-running-card': stillRunning(GRS_DEFAULT), 'still-running-card-dark': stillRunning(GRS_DARK),
+  'still-running-box': stillRunning(PRIMER_LIGHT), 'still-running-box-dark': stillRunning(PRIMER_DARK),
 };
 for (const [name, svg] of Object.entries(out)) writeFileSync(`assets/${name}.svg`, svg);
 
