@@ -33,7 +33,13 @@ Some of it, in numbers I am comfortable defending:
 - **Security and supply-chain hardening** across the organisation. That programme is why [polinrider-cleaner](https://github.com/meSingh/polinrider-cleaner) exists.
 - **Cost.** I read the token bill the way I used to read the AWS bill. Most agent architectures are slow and expensive for the same reason: work waiting on outputs it never needed.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/still-running-dark.svg"><img alt="Still running: Chief Architect at TWINii day counter; Shiprocket integrations core, ValueLabs refactor and git.wtf time in production; contributions in the last year." src="assets/still-running.svg" width="100%"></picture>
+### Still running
+
+<img alt="Chief Architect, TWINii" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FmeSingh%2FmeSingh%2Fmaster%2Fbadges%2Frole.json&style=flat-square">
+<img alt="Shiprocket integrations core, time in production" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FmeSingh%2FmeSingh%2Fmaster%2Fbadges%2Frunning-1.json&style=flat-square">
+<img alt="ValueLabs legacy refactor, time in production" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FmeSingh%2FmeSingh%2Fmaster%2Fbadges%2Frunning-2.json&style=flat-square">
+<img alt="git.wtf, time in production" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FmeSingh%2FmeSingh%2Fmaster%2Fbadges%2Frunning-3.json&style=flat-square">
+<img alt="Contributions in the last year" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FmeSingh%2FmeSingh%2Fmaster%2Fbadges%2Fcontributions.json&style=flat-square">
 
 ### What I work with
 
@@ -127,4 +133,4 @@ A small number of engagements a year, alongside TWINii:
 
 If one of those is you, [book an intro call](https://cal.com/msingh/lets-connect). Based in Delhi, working across UK, US and India hours.
 
-<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; cards update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
+<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; counters update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>

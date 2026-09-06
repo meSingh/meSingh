@@ -2,9 +2,8 @@
 // GitHub renders README SVGs inside <img>: no scripts, no external fetches, but CSS keyframes, SMIL
 // and @font-face data URIs all work. Everything below is self-contained.
 //
-// Two pieces: the ink banner (the profile's header image) and a "Still running" card drawn in the
-// github-readme-stats house style so it sits beside the standard cards. Everything else is native markdown
-// or a default card from the standard profile tools.
+// One image: the ink banner (the profile's header image). The Still running counters are shields.io endpoint
+// badges fed by badges/*.json. Everything else is native markdown or a default card from the standard tools.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const facts = JSON.parse(readFileSync('data/facts.json', 'utf8'));
@@ -108,51 +107,26 @@ function hero(T) {
 
 
 
-// ---------- 2. "Still running" card, in github-readme-stats' own look (default / github_dark) ----------
-const GRS_DEFAULT = { title: '#2f80ed', icon: '#4c71f2', text: '#434d58', bg: '#fffefe', border: '#e4e2e2' };
-const GRS_DARK = { title: '#58a6ff', icon: '#1f6feb', text: '#c9d1d9', bg: '#0d1117', border: '#30363d' };
-const GRS_FONT = `'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif`;
-const OCT = {
-  people: 'M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z',
-  clock: 'M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z',
-  commit: 'M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z',
-  pulse: 'M6 2c.306 0 .582.187.696.471L10 10.731l1.304-3.26A.751.751 0 0 1 12 7h3.25a.75.75 0 0 1 0 1.5h-2.742l-1.812 4.528a.751.751 0 0 1-1.392 0L6 4.77 4.696 8.03A.75.75 0 0 1 4 8.5H.75a.75.75 0 0 1 0-1.5h2.742l1.812-4.529A.751.751 0 0 1 6 2Z',
-};
-function stillRunning(G) {
+// ---------- 2. "Still running" as shields.io endpoint badges ----------
+// badges/*.json follow the shields endpoint schema; the README links to
+// https://img.shields.io/endpoint?url=<raw json url>, so the counters update daily without touching README.md.
+function badges() {
   const role = facts.now.find(n => n.count);
-  const dur = (since) => { const e = elapsed(since); return `${e.y} yrs ${e.m} mos`; };
+  const dur = (since) => { const e = elapsed(since); return `${e.y} yrs ${e.m} mos in production`; };
   const month = (s) => ym(s).toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
-  const rows = [
-    ['people', role.v, `day ${daysSince(role.since).toLocaleString('en-US')} · since ${month(role.since)}`],
-    ...facts.still_running.map(r => ['clock', r.what, `${dur(r.since)} in production`]),
-    ['commit', 'Contributions, last year', gh.contributions.toLocaleString('en-US')],
-  ];
-  const w = 896, h = 55 + rows.length * 25 + 20; // same width as the streak card (card_width=896)
-  let body = `<style>
-  .header { font: 600 18px ${GRS_FONT}; fill: ${G.title} }
-  .stat { font: 600 14px ${GRS_FONT}; fill: ${G.text} }
-  .gray { font: 400 11px ${GRS_FONT}; fill: ${G.text}; opacity: .7 }
-  .icon { fill: ${G.icon} }
-</style>
-<rect x="0.5" y="0.5" rx="4.5" width="${w - 1}" height="${h - 1}" stroke="${G.border}" fill="${G.bg}"/>
-<g transform="translate(25, 35)"><svg class="icon" x="0" y="-14" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.pulse}"/></svg><text x="25" y="0" class="header">Still running</text><text x="${w - 25}" y="0" text-anchor="end" class="gray">updated ${esc(gh.fetched)}</text></g>
-<g transform="translate(0, 55)">`;
-  rows.forEach(([ic, label, value], i) => {
-    body += `\n  <g transform="translate(25, ${i * 25})"><svg class="icon" viewBox="0 0 16 16" width="16" height="16" x="0" y="-1"><path fill-rule="evenodd" d="${OCT[ic]}"/></svg><text class="stat" x="25" y="12.5">${esc(label)}</text><text class="stat" x="${w - 25}" y="12.5" text-anchor="end">${esc(value)}</text></g>`;
-  });
-  body += '\n</g>';
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" fill="none" role="img" aria-labelledby="titleId">
-<title id="titleId">Still running: ${esc(rows.map(r => `${r[1]} ${r[2]}`).join('; '))}</title>
-${body}
-</svg>
-`;
+  const out = {
+    'role': { label: role.v, message: `day ${daysSince(role.since).toLocaleString('en-US')} · since ${month(role.since)}`, color: 'blue' },
+    'contributions': { label: 'contributions, last year', message: gh.contributions.toLocaleString('en-US'), color: 'blue' },
+  };
+  facts.still_running.forEach((r, i) => { out[`running-${i + 1}`] = { label: r.what, message: dur(r.since), color: 'brightgreen' }; });
+  return out;
 }
-
 // ---------- write ----------
 mkdirSync('assets', { recursive: true });
 const out = {
   'hero': hero(INK), 'hero-dark': hero(INK_ON_DARK),
-  'still-running': stillRunning(GRS_DEFAULT), 'still-running-dark': stillRunning(GRS_DARK),
 };
 for (const [name, svg] of Object.entries(out)) writeFileSync(`assets/${name}.svg`, svg);
+mkdirSync('badges', { recursive: true });
+for (const [name, b] of Object.entries(badges())) writeFileSync(`badges/${name}.json`, JSON.stringify({ schemaVersion: 1, ...b }, null, 2) + '\n');
 console.log(`wrote ${Object.keys(out).length} SVGs to assets/`);
