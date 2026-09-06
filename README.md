@@ -35,17 +35,7 @@ Some of it, in numbers I am comfortable defending:
 
 ### Still running
 
-<!-- still-running:start -->
-
-- **Chief Architect, TWINii** · day 340 · since Oct 2025
-- **Shiprocket integrations core** · built Feb 2016, still the hub · **10 years 7 months** in production
-- **ValueLabs legacy refactor** · rebuilt 2018, still in production · **8 years 4 months** in production
-- **git.wtf** · side project, still answering · **9 years 11 months** in production
-- **850 contributions** in the last year
-
-<sub>Counters update daily. Last run 2026-09-06.</sub>
-
-<!-- still-running:end -->
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/still-running-dark.svg"><img alt="Still running: Chief Architect at TWINii day counter; Shiprocket integrations core, ValueLabs refactor and git.wtf time in production; contributions in the last year." src="assets/still-running.svg"></picture>
 
 ### What I work with
 
@@ -137,9 +127,8 @@ Some of it, in numbers I am comfortable defending:
 
 ### Stats
 
-<a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="profile-summary-card-output/github_dark/0-profile-details.svg"><img alt="Profile details" src="profile-summary-card-output/default/0-profile-details.svg"></picture></a>
 <a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="profile-summary-card-output/github_dark/3-stats.svg"><img alt="GitHub stats" src="profile-summary-card-output/default/3-stats.svg" width="40%" align="top"></picture></a>
-<a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=meSingh&theme=github-dark-blue"><img alt="Contribution streak" src="https://streak-stats.demolab.com/?user=meSingh&theme=default" width="58%" align="top"></picture></a>
+<a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=meSingh&theme=github-dark-blue&hide_border=true"><img alt="Contribution streak" src="https://streak-stats.demolab.com/?user=meSingh&theme=default&hide_border=true" width="58%" align="top"></picture></a>
 
 ### Working together
 
@@ -151,4 +140,4 @@ A small number of engagements a year, alongside TWINii:
 
 If one of those is you, [book an intro call](https://cal.com/msingh/lets-connect). Based in Delhi, working across UK, US and India hours.
 
-<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; counters and cards update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
+<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; cards update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
