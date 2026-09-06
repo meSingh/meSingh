@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://msingh.com"><img alt="Website" src="https://img.shields.io/badge/msingh.com-4285F4?style=flat-square&logo=googlechrome&logoColor=white"></a>&nbsp;
-  <a href="https://www.linkedin.com/in/mesingh9/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white"></a>&nbsp;
+  <a href="https://www.linkedin.com/in/mesingh9/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3QgeD0iMiIgeT0iOSIgd2lkdGg9IjQiIGhlaWdodD0iMTMiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI0IiBjeT0iNC41IiByPSIyLjUiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNOSA5aDMuOHYxLjhjLjYtMS4xIDItMi4xIDQuMS0yLjEgNC4zIDAgNS4xIDIuOCA1LjEgNi41VjIyaC00di02YzAtMS41IDAtMy40LTIuMS0zLjRzLTIuNCAxLjYtMi40IDMuM1YyMkg5eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=="></a>&nbsp;
   <a href="https://x.com/meSingh9"><img alt="X" src="https://img.shields.io/badge/@meSingh9-000000?style=flat-square&logo=x&logoColor=white"></a>&nbsp;
   <a href="https://cal.com/msingh/lets-connect"><img alt="Book an intro call" src="https://img.shields.io/badge/Book%20an%20intro%20call-292929?style=flat-square&logo=caldotcom&logoColor=white"></a>&nbsp;
   <img alt="Profile views" src="https://komarev.com/ghpvc/?username=meSingh&style=flat-square&label=views">
