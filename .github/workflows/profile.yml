@@ -35,5 +35,9 @@ jobs:
             echo "No changes."
           else
             git commit -m "Regenerate profile cards for $(date -u +%Y-%m-%d) [skip ci]"
-            git push
+            for attempt in 1 2 3 4; do
+              git pull --rebase -q origin master && git push && break
+              echo "push attempt $attempt failed, retrying"
+              sleep $((attempt * 15))
+            done
           fi
