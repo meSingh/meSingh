@@ -5,6 +5,8 @@
   </picture>
 </a>
 
+<br>
+
 <p align="center">
   <a href="https://msingh.com"><img alt="Website" src="https://img.shields.io/badge/msingh.com-4285F4?style=flat-square&logo=googlechrome&logoColor=white"></a>&nbsp;
   <a href="https://www.linkedin.com/in/mesingh9/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3QgeD0iMiIgeT0iOSIgd2lkdGg9IjQiIGhlaWdodD0iMTMiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI0IiBjeT0iNC41IiByPSIyLjUiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNOSA5aDMuOHYxLjhjLjYtMS4xIDItMi4xIDQuMS0yLjEgNC4zIDAgNS4xIDIuOCA1LjEgNi41VjIyaC00di02YzAtMS41IDAtMy40LTIuMS0zLjRzLTIuNCAxLjYtMi40IDMuM1YyMkg5eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg=="></a>&nbsp;
@@ -78,4 +80,4 @@ If one of those is you, [book an intro call](https://cal.com/msingh/lets-connect
 <img alt="Cal.com" src="https://img.shields.io/badge/Cal.com-555555?style=flat-square&logo=caldotcom&logoColor=white" />
 </p>
 
-<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; cards update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
+<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Delhi, India &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; cards update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
