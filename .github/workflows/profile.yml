@@ -37,6 +37,8 @@ jobs:
           THEME: default
           UTC_OFFSET: 5.5
           AUTO_PUSH: false
+      - name: Keep the light cards (the action empties its output folder on each run)
+        run: mv profile-summary-card-output /tmp/summary-default
       - name: Summary cards, dark theme
         uses: vn7n24fzkq/github-profile-summary-cards@release
         env:
@@ -46,6 +48,11 @@ jobs:
           THEME: github_dark
           UTC_OFFSET: 5.5
           AUTO_PUSH: false
+      - name: Merge both themes
+        run: |
+          mkdir -p profile-summary-card-output
+          cp -R /tmp/summary-default/default profile-summary-card-output/default
+          rm -f profile-summary-card-output/README.md profile-summary-card-output/*/README.md
       - name: Commit if anything changed
         run: |
           git config user.name "github-actions[bot]"

@@ -87,30 +87,11 @@ Some of it, in numbers I am comfortable defending:
 <img alt="GitHub Actions" src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white">
 <img alt="Supply-chain security" src="https://img.shields.io/badge/Supply--chain%20security-555555?style=flat-square">
 
-### Open source
-
-Most of my work since 2021 lives in client and employer repositories. These two are the public exceptions.
-
-<a href="https://github.com/meSingh/polinrider-cleaner"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pin-polinrider-cleaner-dark.svg"><img alt="polinrider-cleaner" src="assets/pin-polinrider-cleaner.svg"></picture></a>
-<a href="https://github.com/meSingh/git.wtf"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pin-git-wtf-dark.svg"><img alt="git.wtf" src="assets/pin-git-wtf.svg"></picture></a>
-
 ### Stats
 
 <a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="profile-summary-card-output/github_dark/0-profile-details.svg"><img alt="Profile details" src="profile-summary-card-output/default/0-profile-details.svg"></picture></a>
 <a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="profile-summary-card-output/github_dark/3-stats.svg"><img alt="GitHub stats" src="profile-summary-card-output/default/3-stats.svg" width="48%"></picture></a>
 <a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=meSingh&theme=github-dark-blue"><img alt="Contribution streak" src="https://streak-stats.demolab.com/?user=meSingh&theme=default" width="48%"></picture></a>
-
-### How I think about production AI
-
-> An agent is not failing when it says "I don't know." It fails when it invents an answer to avoid saying it.
-
-> `request → rule → action → stop` is not a graph problem. It is an `if/else` problem wearing a lanyard.
-
-> Model judgement for ambiguity. Code and rules for everything deterministic. Hard boundaries where mistakes matter.
-
-> The prompt is not always an instruction. Sometimes it is a slightly chaotic transfer of context between two minds.
-
-I write about agent harness drift and versioning prompt files, interrupting agents instead of reviewing them at the end, language-dependent model behaviour and what evals miss, durable state for agents (boring, external, disposable), and the economics of a 600-million-token month. The longer versions are on [LinkedIn](https://www.linkedin.com/in/mesingh9/recent-activity/all/).
 
 ### Working together
 

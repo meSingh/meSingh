@@ -106,57 +106,10 @@ function hero(T) {
 }
 
 
-// ---------- 2. repo pin cards, a faithful reproduction of github-readme-stats' pin card ----------
-// Same geometry, type and themes ("default" for light chrome, "github_dark" for dark). Used because every
-// public github-readme-stats host was rate-limited or paused on 7 Sep 2026; swap for the real service by
-// pointing the README at a self-hosted instance and deleting this.
-const GRS_DEFAULT = { title: '#2f80ed', icon: '#4c71f2', text: '#434d58', bg: '#fffefe', border: '#e4e2e2' };
-const GRS_DARK = { title: '#58a6ff', icon: '#1f6feb', text: '#c9d1d9', bg: '#0d1117', border: '#30363d' };
-const OCT = {
-  star: 'M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z',
-  repo: 'M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z',
-  fork: 'M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z',
-};
-const GRS_FONT = `'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif`;
-const fmt = (n) => n == null ? '–' : n.toLocaleString('en-US');
-function wrap(text, max) {
-  const words = text.split(/\s+/), lines = [''];
-  for (const w of words) { if ((lines[lines.length - 1] + ' ' + w).trim().length > max) lines.push(w); else lines[lines.length - 1] = (lines[lines.length - 1] + ' ' + w).trim(); }
-  if (lines.length > 2) lines[1] = lines[1].slice(0, max - 1) + '…';
-  return lines.slice(0, 2);
-}
-function pinCard(G, r) {
-  const desc = wrap(r.description.replace(/:[a-z_]+:/g, '').replace(/[\p{Extended_Pictographic}️]/gu, '').replace(/\s+/g, ' ').trim(), 58);
-  const langW = (r.language ?? '').length * 8 + 40;
-  const body = `<style>
-  .header { font: 600 18px ${GRS_FONT}; fill: ${G.title} }
-  .description { font: 400 13px ${GRS_FONT}; fill: ${G.text} }
-  .gray { font: 400 12px ${GRS_FONT}; fill: ${G.text} }
-  .icon { fill: ${G.icon} }
-</style>
-<rect x="0.5" y="0.5" rx="4.5" width="399" height="119" stroke="${G.border}" fill="${G.bg}"/>
-<g transform="translate(25, 35)"><svg class="icon" x="0" y="-13" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.repo}"/></svg><text x="25" y="0" class="header">${esc(r.name)}</text>${r.archived ? `<text x="350" y="0" text-anchor="end" class="gray">Archived</text>` : ''}</g>
-<g transform="translate(0, 55)"><text class="description" x="25" y="-5">${desc.map((l, i) => `<tspan dy="${i ? 1.2 : 0}em" x="25">${esc(l)}</tspan>`).join('')}</text></g>
-<g transform="translate(30, 100)">
-  <g><circle cx="0" cy="-5" r="6" fill="${r.languageColor}"/><text class="gray" x="15">${esc(r.language ?? '')}</text></g>
-  <g transform="translate(${langW}, 0)"><svg class="icon" y="-12" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.star}"/></svg><text class="gray" x="25">${fmt(r.stars)}</text></g>
-  <g transform="translate(${langW + 70}, 0)"><svg class="icon" y="-12" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.fork}"/></svg><text class="gray" x="25">${fmt(r.forks)}</text></g>
-</g>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="120" viewBox="0 0 400 120" fill="none" role="img" aria-labelledby="titleId">
-<title id="titleId">${esc(r.name)}: ${esc(r.description)}</title>
-${body}
-</svg>
-`;
-}
-
 // ---------- write ----------
 mkdirSync('assets', { recursive: true });
 const out = {
   'hero': hero(INK), 'hero-dark': hero(INK_ON_DARK),
 };
-for (const r of gh.pins) {
-  const slug = 'pin-' + r.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  out[slug] = pinCard(GRS_DEFAULT, r); out[`${slug}-dark`] = pinCard(GRS_DARK, r);
-}
 for (const [name, svg] of Object.entries(out)) writeFileSync(`assets/${name}.svg`, svg);
 console.log(`wrote ${Object.keys(out).length} SVGs to assets/`);
