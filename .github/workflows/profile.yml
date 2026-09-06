@@ -1,0 +1,39 @@
+name: Regenerate profile cards
+
+on:
+  schedule:
+    - cron: "23 */6 * * *"   # every six hours; the native graph under the README stays the live truth
+  workflow_dispatch:
+  push:
+    paths:
+      - "data/facts.json"
+      - "scripts/**"
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch live GitHub numbers
+        run: node scripts/fetch.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate SVGs
+        run: node scripts/generate.mjs
+      - name: Commit if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/github.json assets/*.svg
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Regenerate profile cards for $(date -u +%Y-%m-%d) [skip ci]"
+            git push
+          fi

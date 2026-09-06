@@ -1,0 +1,69 @@
+{
+  "_comment": "Hand-maintained facts. Every value here traces to ABOUT_MANDEEP.md in the Documents root. Dates are YYYY-MM.",
+  "name": "Mandeep Singh",
+  "handle": "meSingh",
+  "site": "msingh.com",
+  "intro_call": "https://cal.com/msingh/lets-connect",
+  "statement": [
+    "Your AI demo impressed the room.",
+    "Now it has to",
+    "survive production."
+  ],
+  "role_line": "Chief Architect, TWINii  ·  Fractional CTO",
+  "proof_row": [
+    "Production AI",
+    "Agent reliability",
+    "Supply-chain security"
+  ],
+  "now": [
+    {
+      "k": "Role",
+      "v": "Chief Architect, TWINii",
+      "since": "2025-10",
+      "count": true
+    },
+    {
+      "k": "Also",
+      "v": "Fractional CTO & AI production advisor"
+    },
+    {
+      "k": "Base",
+      "v": "Delhi · UK, US and India hours"
+    }
+  ],
+  "still_running": [
+    {
+      "what": "Shiprocket integrations core",
+      "detail": "built Feb 2016, still the hub",
+      "since": "2016-02"
+    },
+    {
+      "what": "ValueLabs legacy refactor",
+      "detail": "rebuilt 2018, still in production",
+      "since": "2018-05"
+    },
+    {
+      "what": "git.wtf",
+      "detail": "side project, still answering",
+      "since": "2016-10"
+    }
+  ],
+  "repos": [
+    {
+      "name": "polinrider-cleaner",
+      "blurb": [
+        "Detect and recover from the PolinRider supply-chain campaign across an org,",
+        "an account or a machine. Shell only. Every destructive step is a dry run first."
+      ],
+      "year": "2026"
+    },
+    {
+      "name": "git.wtf",
+      "blurb": [
+        "Answers for the Git situations that make people swear.",
+        "Running since 2016."
+      ],
+      "year": "2016"
+    }
+  ]
+}
