@@ -47,23 +47,5 @@
       "detail": "side project, still answering",
       "since": "2016-10"
     }
-  ],
-  "repos": [
-    {
-      "name": "polinrider-cleaner",
-      "blurb": [
-        "Detect and recover from the PolinRider supply-chain campaign across an org,",
-        "an account or a machine. Shell only. Every destructive step is a dry run first."
-      ],
-      "year": "2026"
-    },
-    {
-      "name": "git.wtf",
-      "blurb": [
-        "Answers for the Git situations that make people swear.",
-        "Running since 2016."
-      ],
-      "year": "2016"
-    }
   ]
 }

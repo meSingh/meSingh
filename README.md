@@ -48,17 +48,8 @@ Some of it, in numbers I am comfortable defending:
 
 Most of my work since 2021 lives in client and employer repositories. These two are the public exceptions.
 
-<table>
-  <tr>
-    <td width="50%"><a href="https://github.com/meSingh/polinrider-cleaner"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/repo-polinrider-cleaner-dark.svg"><img alt="polinrider-cleaner" src="assets/repo-polinrider-cleaner.svg" width="100%"></picture></a></td>
-    <td width="50%"><a href="https://github.com/meSingh/git.wtf"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/repo-git-wtf-dark.svg"><img alt="git.wtf" src="assets/repo-git-wtf.svg" width="100%"></picture></a></td>
-  </tr>
-</table>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/calendar-dark.svg">
-  <img alt="Contribution calendar for the last twelve months. Most of the work is in private repositories." src="assets/calendar.svg" width="100%">
-</picture>
+- **[polinrider-cleaner](https://github.com/meSingh/polinrider-cleaner)** · Detect and recover from the PolinRider supply-chain campaign across a GitHub org, a personal account or a developer machine. Shell only, zero dependencies, every destructive step is a dry run first. `Shell` · 2026
+- **[git.wtf](https://github.com/meSingh/git.wtf)** · Answers for the Git situations that make people swear. Running since 2016. `PHP` · 46 stars
 
 ### How I think about production AI
 
@@ -82,4 +73,4 @@ A small number of engagements a year, alongside TWINii:
 
 If one of those is you, [book an intro call](https://cal.com/msingh/lets-connect). Based in Delhi, working across UK, US and India hours.
 
-<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; the cards above regenerate every six hours from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
+<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; the ledger above regenerates daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>

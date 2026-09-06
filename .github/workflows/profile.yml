@@ -2,7 +2,7 @@ name: Regenerate profile cards
 
 on:
   schedule:
-    - cron: "23 */6 * * *"   # every six hours; the native graph under the README stays the live truth
+    - cron: "23 1 * * *"   # daily, 06:53 IST
   workflow_dispatch:
   push:
     paths:

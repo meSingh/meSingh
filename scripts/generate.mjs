@@ -2,8 +2,8 @@
 // GitHub renders README SVGs inside <img>: no scripts, no external fetches, but CSS keyframes, SMIL
 // and @font-face data URIs all work. Everything below is self-contained.
 //
-// Two themes. The hero is always the ink banner (the one branded object on the page). Every other card
-// is ivory paper in light chrome and ink in dark chrome, so it sits naturally beside GitHub's own cards.
+// Two pieces. The hero is always the ink banner (the one branded object on the page). The ledger is ivory
+// paper in light chrome and ink in dark chrome, so it sits naturally beside GitHub's own cards.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const facts = JSON.parse(readFileSync('data/facts.json', 'utf8'));
@@ -20,7 +20,6 @@ const INK = {
   washes: `<rect width="100%" height="100%" fill="url(#warm)"/><rect width="100%" height="100%" fill="url(#cool)"/><rect width="100%" height="100%" fill="url(#ground)"/>`,
   grain: .9, border: '#E9DBC4', borderA: .12, hair: '#E9DBC4', hairA: .16, lead: '#D9C49E', leadA: .7, rule: '#E9DBC4', ruleA: .09, edge: '#E3D1AC', edgeA: .28,
   text: '#F6F3ED', dim: '#C4C0B6', accent: '#E3D1AC', accent2: '#E8D6B2', micro: '#C3BCA9', proof: '#CBC5B3', sep: '#7E7A6E', wm: '#F1ECE2', faint: '#8F8A7E',
-  cellOff: '#E9DBC4', cellOn: '#E3D1AC', alpha: [.07, .26, .46, .70, .98],
 };
 // GitHub dark chrome is #0d1117: lift the floor six points and strengthen the hairline so the card keeps an edge
 const INK_ON_DARK = { ...INK, stops: INK.stops.map(lift(6)), borderA: .22 };
@@ -29,7 +28,6 @@ const PAPER = {
   washes: `<rect width="100%" height="100%" fill="url(#paperwarm)"/>`,
   grain: .5, border: '#0E1218', borderA: .14, hair: '#0E1218', hairA: .14, lead: '#9A7F4A', leadA: .9, rule: '#0E1218', ruleA: .08, edge: '#9A7F4A', edgeA: .35,
   text: '#0E1218', dim: '#4E4A42', accent: '#8E7440', accent2: '#7C6436', micro: '#6B665B', proof: '#3E3A33', sep: '#A9A392', wm: '#0E1218', faint: '#7A7568',
-  cellOff: '#0E1218', cellOn: '#8E7440', alpha: [.06, .22, .42, .66, .95],
 };
 
 // ---------- date helpers ----------
@@ -138,60 +136,11 @@ function ledger(T) {
   return frame(T, { w: 1280, h: 352, body: rows, title: 'Now, still running, and live GitHub numbers' });
 }
 
-// ---------- 3. contribution calendar ----------
-function calendar(T) {
-  const cell = 18, gap = 4, step = cell + gap, left = 57, top = 92;
-  const weeks = gh.weeks, max = Math.max(1, ...weeks.flat());
-  const level = (n) => n === 0 ? 0 : n < max * .12 ? 1 : n < max * .3 ? 2 : n < max * .6 ? 3 : 4;
-  let cells = '';
-  weeks.forEach((w, wi) => w.forEach((n, di) => {
-    const lv = level(n);
-    cells += `<rect x="${left + wi * step}" y="${top + di * step}" width="${cell}" height="${cell}" rx="3" fill="${lv ? T.cellOn : T.cellOff}" fill-opacity="${T.alpha[lv]}" class="pop" style="animation-delay:${(wi + di) * 22 + 300}ms"/>`;
-  }));
-  const first = new Date(gh.firstDay + 'T00:00:00Z');
-  let months = '', lastM = -1;
-  weeks.forEach((w, wi) => {
-    const d = new Date(first.getTime() + wi * 7 * 86400000);
-    if (d.getUTCMonth() !== lastM && wi < weeks.length - 2) { lastM = d.getUTCMonth(); months += `<text x="${left + wi * step}" y="${top - 12}" class="k">${d.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }).toUpperCase()}</text>`; }
-  });
-  const pct = Math.round(gh.privateContributions / gh.contributions * 100);
-  const fy = top + 7 * step + 40;
-  const body = `
-  <text x="72" y="52" class="k rise" style="animation-delay:.1s">LAST 12 MONTHS</text>
-  <text x="1208" y="52" text-anchor="end" class="k rise" style="animation-delay:.1s">${gh.contributions.toLocaleString('en-GB')} CONTRIBUTIONS · ${pct}% IN PRIVATE REPOSITORIES</text>
-  ${hairline(T, 72, 1208, 62, .1)}
-  <g class="rise" style="animation-delay:.2s">${months}</g>
-  ${cells}
-  <text x="72" y="${fy}" font-size="14" font-weight="500" fill="${T.faint}" class="rise" style="animation-delay:1.9s">Most of the work since 2021 is inside client and employer repositories. The graph is the shape of it, not the size.</text>
-  <text x="${1208 - 5 * 16 - 10}" y="${fy}" text-anchor="end" class="k rise" style="animation-delay:1.9s">LESS</text>
-  ${[0, 1, 2, 3, 4].map((lv) => `<rect x="${1208 - 5 * 16 + lv * 16}" y="${fy - 11}" width="12" height="12" rx="2" fill="${lv ? T.cellOn : T.cellOff}" fill-opacity="${T.alpha[lv]}"/>`).join('')}
-  <text x="${1208 + 8}" y="${fy}" class="k rise" style="animation-delay:1.9s">MORE</text>`;
-  return frame(T, { w: 1280, h: fy + 30, body, title: `${gh.contributions} contributions in the last year, ${pct}% private`,
-    extraCss: `.pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:pop .45s cubic-bezier(.2,.7,.2,1) forwards}@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}` });
-}
-
-// ---------- 4. repo cards ----------
-function repoCard(T, r) {
-  const live = gh.repos[r.name] ?? {};
-  const meta = [live.stars != null ? `${live.stars} ${live.stars === 1 ? 'star' : 'stars'}` : null, live.language, r.year, live.archived ? 'archived' : null].filter(Boolean).map(esc).join(`<tspan fill="${T.sep}">  ·  </tspan>`);
-  const body = `
-  <text x="36" y="46" font-size="21" font-weight="600" letter-spacing="-.2" fill="${T.text}" class="rise" style="animation-delay:.1s">${esc(r.name)}</text>
-  <text x="590" y="46" text-anchor="end" class="k rise" style="animation-delay:.1s">${meta}</text>
-  <text x="36" y="80" font-size="15" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:.25s">${esc(r.blurb[0])}</text>
-  <text x="36" y="102" font-size="15" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:.3s">${esc(r.blurb[1])}</text>`;
-  return frame(T, { w: 626, h: 128, body, title: `${r.name}: ${r.blurb.join(' ')}` });
-}
-
 // ---------- write ----------
 mkdirSync('assets', { recursive: true });
 const out = {
   'hero': hero(INK), 'hero-dark': hero(INK_ON_DARK),
   'ledger': ledger(PAPER), 'ledger-dark': ledger(INK_ON_DARK),
-  'calendar': calendar(PAPER), 'calendar-dark': calendar(INK_ON_DARK),
 };
-for (const r of facts.repos) {
-  const slug = 'repo-' + r.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  out[slug] = repoCard(PAPER, r); out[`${slug}-dark`] = repoCard(INK_ON_DARK, r);
-}
 for (const [name, svg] of Object.entries(out)) writeFileSync(`assets/${name}.svg`, svg);
 console.log(`wrote ${Object.keys(out).length} SVGs to assets/`);
