@@ -33,9 +33,7 @@ Some of it, in numbers I am comfortable defending:
 - **Security and supply-chain hardening** across the organisation. That programme is why [polinrider-cleaner](https://github.com/meSingh/polinrider-cleaner) exists.
 - **Cost.** I read the token bill the way I used to read the AWS bill. Most agent architectures are slow and expensive for the same reason: work waiting on outputs it never needed.
 
-### Still running
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/still-running-dark.svg"><img alt="Still running: Chief Architect at TWINii day counter; Shiprocket integrations core, ValueLabs refactor and git.wtf time in production; contributions in the last year." src="assets/still-running.svg"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/still-running-dark.svg"><img alt="Still running: Chief Architect at TWINii day counter; Shiprocket integrations core, ValueLabs refactor and git.wtf time in production; contributions in the last year." src="assets/still-running.svg" width="100%"></picture>
 
 ### What I work with
 

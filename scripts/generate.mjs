@@ -127,7 +127,7 @@ function stillRunning(G) {
     ...facts.still_running.map(r => ['clock', r.what, `${dur(r.since)} in production`]),
     ['commit', 'Contributions, last year', gh.contributions.toLocaleString('en-US')],
   ];
-  const w = 495, h = 55 + rows.length * 25 + 20;
+  const w = 896, h = 55 + rows.length * 25 + 20; // same width as the streak card (card_width=896)
   let body = `<style>
   .header { font: 600 18px ${GRS_FONT}; fill: ${G.title} }
   .stat { font: 600 14px ${GRS_FONT}; fill: ${G.text} }
