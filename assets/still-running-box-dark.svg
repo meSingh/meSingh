@@ -48,6 +48,6 @@
   <text x="880" y="41" text-anchor="end" class="since">since Oct 2025</text>
 </g>
 <line x1="0.5" y1="252" x2="895.5" y2="252" stroke="#30363d"/>
-<text x="16" y="276" class="note"><tspan class="right" fill="#e6edf3">850</tspan> contributions in the last year</text>
+<text x="16" y="276" class="note"><tspan class="right" fill="#e6edf3">861</tspan> contributions in the last year</text>
 <text x="880" y="276" text-anchor="end" class="note">The integrations core built at Shiprocket in 2016 is still the hub today.</text>
 </svg>
