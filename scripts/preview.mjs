@@ -18,6 +18,7 @@ function render(md) {
   const lines = md.split('\n'); let out = '', i = 0;
   while (i < lines.length) {
     const l = lines[i];
+    if (/^\s*<!--.*-->\s*$/.test(l)) { i++; continue; }
     if (/^\s*</.test(l)) { let block = ''; while (i < lines.length && lines[i].trim() !== '') block += lines[i++] + '\n'; out += block; continue; }
     if (l.startsWith('### ')) { out += `<h3>${inline(l.slice(4))}</h3>\n`; i++; continue; }
     if (l.startsWith('- ')) { out += '<ul>'; while (i < lines.length && lines[i].startsWith('- ')) out += `<li>${inline(lines[i++].slice(2))}</li>`; out += '</ul>\n'; continue; }

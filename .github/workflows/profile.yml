@@ -24,13 +24,33 @@ jobs:
         run: node scripts/fetch.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Generate SVGs
+      - name: Generate the banner
         run: node scripts/generate.mjs
+      - name: Update the README counters
+        run: node scripts/readme.mjs
+      - name: Summary cards, light theme (vn7n24fzkq/github-profile-summary-cards)
+        uses: vn7n24fzkq/github-profile-summary-cards@release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          USERNAME: meSingh
+          THEME: default
+          UTC_OFFSET: 5.5
+          AUTO_PUSH: false
+      - name: Summary cards, dark theme
+        uses: vn7n24fzkq/github-profile-summary-cards@release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          USERNAME: meSingh
+          THEME: github_dark
+          UTC_OFFSET: 5.5
+          AUTO_PUSH: false
       - name: Commit if anything changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/github.json assets/*.svg
+          git add data/github.json assets/*.svg README.md profile-summary-card-output
           if git diff --cached --quiet; then
             echo "No changes."
           else

@@ -55,7 +55,7 @@ const u = data.user;
 const cal = u.contributionsCollection.contributionCalendar;
 const out = {
   fetched: new Date().toISOString().slice(0, 10),
-  scope: process.env.PROFILE_TOKEN ? 'private' : 'public',
+  scope: process.env.PROFILE_TOKEN ? 'private' : process.env.GITHUB_TOKEN ? 'public' : 'local',
   createdAt: u.createdAt.slice(0, 10),
   followers: u.followers.totalCount,
   publicRepos: u.repositories.totalCount,

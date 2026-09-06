@@ -2,8 +2,8 @@
 // GitHub renders README SVGs inside <img>: no scripts, no external fetches, but CSS keyframes, SMIL
 // and @font-face data URIs all work. Everything below is self-contained.
 //
-// Two pieces. The hero is always the ink banner (the one branded object on the page). The ledger is ivory
-// paper in light chrome and ink in dark chrome, so it sits naturally beside GitHub's own cards.
+// One piece: the ink banner, the profile's header image. Everything else on the page is native markdown or a
+// default card from the standard profile tools, in their own themes.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const facts = JSON.parse(readFileSync('data/facts.json', 'utf8'));
@@ -105,104 +105,58 @@ function hero(T) {
     extraCss: `.sweep{animation:sweep 7s linear infinite;animation-delay:1.6s;stroke-dashoffset:1000}@keyframes sweep{from{stroke-dashoffset:1000}to{stroke-dashoffset:-1000}}` });
 }
 
-// ---------- 2. ledger: now / still running / live numbers ----------
-function ledger(T) {
-  const colL = 72, colLR = 584, colM = 656, right = 1208;
-  let rows = `<text x="${colL}" y="52" class="k rise" style="animation-delay:.1s">NOW</text>${hairline(T, colL, colLR, 62, .1)}`;
-  facts.now.forEach((n, j) => {
-    const yy = 98 + j * 60, d = .3 + j * .12;
-    const sub = n.count ? `day ${daysSince(n.since).toLocaleString('en-GB')} · since ${ym(n.since).toLocaleString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' })}` : '';
-    rows += `
-  <text x="${colL}" y="${yy}" class="k rise" style="animation-delay:${d}s">${esc(n.k.toUpperCase())}</text>
-  <text x="${colLR}" y="${yy}" text-anchor="end" class="v rise" style="animation-delay:${d}s">${esc(n.v)}</text>
-  ${sub ? `<text x="${colLR}" y="${yy + 22}" text-anchor="end" font-size="13" font-weight="500" fill="${T.faint}" class="rise" style="animation-delay:${d + .05}s">${esc(sub)}</text>` : ''}
-  ${rule(T, colL, colLR, yy + 34)}`;
-  });
-  rows += `<text x="${colM}" y="52" class="k rise" style="animation-delay:.1s">STILL RUNNING</text><text x="${right}" y="52" text-anchor="end" class="k rise" style="animation-delay:.1s">UPTIME</text>${hairline(T, colM, right, 62, .1)}`;
-  facts.still_running.forEach((s, j) => {
-    const yy = 98 + j * 60, e = elapsed(s.since), d = .35 + j * .12;
-    rows += `
-  <text x="${colM}" y="${yy}" class="v rise" style="animation-delay:${d}s">${esc(s.what)}</text>
-  <text x="${colM}" y="${yy + 22}" font-size="13" font-weight="500" fill="${T.faint}" class="rise" style="animation-delay:${d + .05}s">${esc(s.detail)}</text>
-  <text x="${right}" y="${yy}" text-anchor="end" font-size="22" font-weight="600" fill="${T.accent}" letter-spacing="-.3" class="rise" style="animation-delay:${d}s">${e.y}<tspan font-size="13" font-weight="500" fill="${T.micro}" letter-spacing=".08em"> Y </tspan>${e.m}<tspan font-size="13" font-weight="500" fill="${T.micro}" letter-spacing=".08em"> M</tspan></text>
-  ${rule(T, colM, right, yy + 34)}`;
-  });
-  rows += `<text x="${right}" y="302" text-anchor="end" font-size="12" font-weight="500" letter-spacing=".12em" fill="${T.sep}" class="rise" style="animation-delay:1.1s">REGENERATED ${esc(gh.fetched.toUpperCase())}</text>`;
-  return frame(T, { w: 1280, h: 322, body: rows, title: 'Now and still running' });
-}
 
-
-// ---------- 3. stats card, in the layout GitHub readers know ----------
-const ICON = {
-  star: 'M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z',
-  commit: 'M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z',
-  pr: 'M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z',
-  lock: 'M4 4a4 4 0 0 1 8 0v2h.25c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-5.5C2 6.784 2.784 6 3.75 6H4Zm8.25 3.5h-8.5a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25ZM10.5 6V4a2.5 2.5 0 1 0-5 0v2Z',
-  people: 'M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z',
+// ---------- 2. repo pin cards, a faithful reproduction of github-readme-stats' pin card ----------
+// Same geometry, type and themes ("default" for light chrome, "github_dark" for dark). Used because every
+// public github-readme-stats host was rate-limited or paused on 7 Sep 2026; swap for the real service by
+// pointing the README at a self-hosted instance and deleting this.
+const GRS_DEFAULT = { title: '#2f80ed', icon: '#4c71f2', text: '#434d58', bg: '#fffefe', border: '#e4e2e2' };
+const GRS_DARK = { title: '#58a6ff', icon: '#1f6feb', text: '#c9d1d9', bg: '#0d1117', border: '#30363d' };
+const OCT = {
+  star: 'M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z',
   repo: 'M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z',
   fork: 'M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z',
-  clock: 'M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z',
 };
-const icon = (T, name, x, y, delay) => `<path transform="translate(${x} ${y}) scale(1.15)" fill="${T.accent}" d="${ICON[name]}" class="rise" style="animation-delay:${delay}s"/>`;
-const fmt = (n) => n == null ? '–' : n.toLocaleString('en-GB');
-
-function statsCard(T) {
-  const pct = Math.round(gh.privateContributions / gh.contributions * 100);
-  const memberFor = elapsed(gh.createdAt.slice(0, 7)).y;
-  const allTime = gh.scope === 'private';
-  const rows = [
-    ['star', 'Total stars earned', fmt(gh.stars)],
-    ...(allTime ? [
-      ['commit', 'Total commits', fmt(gh.allTimeCommits)],
-      ['pr', 'Total pull requests', fmt(gh.allTimePRs)],
-    ] : []),
-    ['lock', 'Contributions, last year', `${fmt(gh.contributions)}${gh.privateContributions > 0 ? `<tspan fill="${T.faint}" font-weight="500">  ·  ${pct}% private</tspan>` : ''}`],
-    ['repo', 'Public repositories', fmt(gh.publicRepos)],
-    ['people', 'Followers', fmt(gh.followers)],
-    ['clock', 'On GitHub since', `${gh.createdAt.slice(0, 4)}<tspan fill="${T.faint}" font-weight="500">  ·  ${memberFor} years</tspan>`],
-  ];
-  let body = `<text x="36" y="46" font-size="18" font-weight="600" letter-spacing="-.2" fill="${T.accent}" class="rise" style="animation-delay:.05s">Mandeep Singh's GitHub stats</text>`;
-  rows.forEach(([ic, label, value], i) => {
-    const y = 88 + i * 34, d = .2 + i * .08;
-    body += `${icon(T, ic, 36, y - 14, d)}
-  <text x="66" y="${y}" font-size="15" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:${d}s">${label}</text>
-  <text x="${626 - 36}" y="${y}" text-anchor="end" font-size="15" font-weight="600" fill="${T.text}" class="rise" style="animation-delay:${d}s">${value}</text>`;
-  });
-  return frame(T, { w: 626, h: 88 + rows.length * 34 + 4, body, title: 'GitHub stats' });
-}
-
-// ---------- 4. repo pin cards, in the layout GitHub readers know ----------
+const GRS_FONT = `'Segoe UI', Ubuntu, 'Helvetica Neue', Sans-Serif`;
+const fmt = (n) => n == null ? '–' : n.toLocaleString('en-US');
 function wrap(text, max) {
-  const words = text.split(/\s+/), lines = ['']; 
+  const words = text.split(/\s+/), lines = [''];
   for (const w of words) { if ((lines[lines.length - 1] + ' ' + w).trim().length > max) lines.push(w); else lines[lines.length - 1] = (lines[lines.length - 1] + ' ' + w).trim(); }
-  return lines.slice(0, 2).map((l, i, a) => i === 1 && lines.length > 2 ? l.slice(0, max - 1) + '…' : l);
+  if (lines.length > 2) lines[1] = lines[1].slice(0, max - 1) + '…';
+  return lines.slice(0, 2);
 }
-function pinCard(T, r) {
-  const desc = wrap(r.description.replace(/:[a-z_]+:/g, '').replace(/[\p{Extended_Pictographic}\uFE0F]/gu, '').replace(/\s+/g, ' ').trim(), 70);
-  let body = `${icon(T, 'repo', 36, 30, .05)}
-  <text x="64" y="46" font-size="17" font-weight="600" fill="${T.accent}" class="rise" style="animation-delay:.05s">${esc(r.name)}</text>
-  ${r.archived ? `<text x="590" y="46" text-anchor="end" class="k rise" style="animation-delay:.05s">ARCHIVED</text>` : ''}`;
-  desc.forEach((l, i) => { body += `<text x="36" y="${76 + i * 21}" font-size="14" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:${.2 + i * .08}s">${esc(l)}</text>`; });
-  const y = 76 + desc.length * 21 + 18;
-  let x = 36;
-  body += `<circle cx="${x + 6}" cy="${y - 5}" r="6" fill="${r.languageColor}" class="rise" style="animation-delay:.4s"/><text x="${x + 18}" y="${y}" font-size="13" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:.4s">${esc(r.language ?? '')}</text>`;
-  x += 18 + (r.language ?? '').length * 8 + 28;
-  body += `${icon(T, 'star', x, y - 13, .45)}<text x="${x + 24}" y="${y}" font-size="13" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:.45s">${fmt(r.stars)}</text>`;
-  x += 24 + String(r.stars).length * 8 + 28;
-  body += `${icon(T, 'fork', x, y - 13, .5)}<text x="${x + 24}" y="${y}" font-size="13" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:.5s">${fmt(r.forks)}</text>`;
-  return frame(T, { w: 626, h: y + 26, body, title: `${r.name}: ${r.description}` });
+function pinCard(G, r) {
+  const desc = wrap(r.description.replace(/:[a-z_]+:/g, '').replace(/[\p{Extended_Pictographic}️]/gu, '').replace(/\s+/g, ' ').trim(), 58);
+  const langW = (r.language ?? '').length * 8 + 40;
+  const body = `<style>
+  .header { font: 600 18px ${GRS_FONT}; fill: ${G.title} }
+  .description { font: 400 13px ${GRS_FONT}; fill: ${G.text} }
+  .gray { font: 400 12px ${GRS_FONT}; fill: ${G.text} }
+  .icon { fill: ${G.icon} }
+</style>
+<rect x="0.5" y="0.5" rx="4.5" width="399" height="119" stroke="${G.border}" fill="${G.bg}"/>
+<g transform="translate(25, 35)"><svg class="icon" x="0" y="-13" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.repo}"/></svg><text x="25" y="0" class="header">${esc(r.name)}</text>${r.archived ? `<text x="350" y="0" text-anchor="end" class="gray">Archived</text>` : ''}</g>
+<g transform="translate(0, 55)"><text class="description" x="25" y="-5">${desc.map((l, i) => `<tspan dy="${i ? 1.2 : 0}em" x="25">${esc(l)}</tspan>`).join('')}</text></g>
+<g transform="translate(30, 100)">
+  <g><circle cx="0" cy="-5" r="6" fill="${r.languageColor}"/><text class="gray" x="15">${esc(r.language ?? '')}</text></g>
+  <g transform="translate(${langW}, 0)"><svg class="icon" y="-12" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.star}"/></svg><text class="gray" x="25">${fmt(r.stars)}</text></g>
+  <g transform="translate(${langW + 70}, 0)"><svg class="icon" y="-12" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.fork}"/></svg><text class="gray" x="25">${fmt(r.forks)}</text></g>
+</g>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="120" viewBox="0 0 400 120" fill="none" role="img" aria-labelledby="titleId">
+<title id="titleId">${esc(r.name)}: ${esc(r.description)}</title>
+${body}
+</svg>
+`;
 }
 
 // ---------- write ----------
 mkdirSync('assets', { recursive: true });
 const out = {
   'hero': hero(INK), 'hero-dark': hero(INK_ON_DARK),
-  'ledger': ledger(PAPER), 'ledger-dark': ledger(INK_ON_DARK),
-  'stats': statsCard(PAPER), 'stats-dark': statsCard(INK_ON_DARK),
 };
 for (const r of gh.pins) {
   const slug = 'pin-' + r.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  out[slug] = pinCard(PAPER, r); out[`${slug}-dark`] = pinCard(INK_ON_DARK, r);
+  out[slug] = pinCard(GRS_DEFAULT, r); out[`${slug}-dark`] = pinCard(GRS_DARK, r);
 }
 for (const [name, svg] of Object.entries(out)) writeFileSync(`assets/${name}.svg`, svg);
 console.log(`wrote ${Object.keys(out).length} SVGs to assets/`);

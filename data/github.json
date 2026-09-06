@@ -1,17 +1,17 @@
 {
   "fetched": "2026-09-06",
-  "scope": "public",
+  "scope": "local",
   "createdAt": "2012-09-18",
   "followers": 43,
   "publicRepos": 26,
   "stars": 116,
   "forks": 42,
-  "contributions": 843,
-  "privateContributions": 758,
-  "commitsLastYear": 53,
-  "prsLastYear": 26,
-  "reviewsLastYear": 0,
-  "reposContributed": 5,
+  "contributions": 846,
+  "privateContributions": 5,
+  "commitsLastYear": 678,
+  "prsLastYear": 108,
+  "reviewsLastYear": 35,
+  "reposContributed": 61,
   "weeks": [
     [
       0,
@@ -95,8 +95,8 @@
       0
     ],
     [
-      1,
-      7,
+      0,
+      8,
       0,
       0,
       2,
@@ -132,8 +132,8 @@
     ],
     [
       0,
-      1,
-      2,
+      0,
+      3,
       0,
       0,
       0,
@@ -223,8 +223,8 @@
     [
       0,
       0,
-      6,
-      11,
+      5,
+      12,
       0,
       0,
       0
@@ -384,8 +384,8 @@
     ],
     [
       0,
-      2,
       1,
+      2,
       1,
       8,
       0,
@@ -396,8 +396,8 @@
       1,
       0,
       0,
-      2,
-      3,
+      1,
+      4,
       1
     ],
     [
@@ -405,8 +405,8 @@
       4,
       7,
       0,
-      3,
-      1,
+      2,
+      2,
       0
     ],
     [
@@ -440,8 +440,8 @@
       0,
       4,
       1,
-      12,
-      16,
+      11,
+      17,
       4,
       17
     ],
@@ -482,7 +482,8 @@
       66
     ],
     [
-      63
+      63,
+      4
     ]
   ],
   "firstDay": "2025-09-07",
@@ -508,6 +509,6 @@
       "pushed": "2021-07-19"
     }
   ],
-  "allTimeCommits": 731,
-  "allTimePRs": 57
+  "allTimeCommits": 6658,
+  "allTimePRs": 334
 }
