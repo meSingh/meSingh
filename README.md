@@ -6,10 +6,11 @@
 </a>
 
 <p align="center">
-  <a href="https://msingh.com">msingh.com</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="https://www.linkedin.com/in/mesingh9/">LinkedIn</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="https://x.com/meSingh9">X</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-  <a href="https://cal.com/msingh/lets-connect">Book an intro call</a>
+  <a href="https://msingh.com"><img alt="msingh.com" src="https://img.shields.io/badge/msingh.com-F3EFE6?style=flat-square&logo=googlechrome&logoColor=8E7440"></a>&nbsp;
+  <a href="https://www.linkedin.com/in/mesingh9/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-F3EFE6?style=flat-square&logo=linkedin&logoColor=8E7440"></a>&nbsp;
+  <a href="https://x.com/meSingh9"><img alt="X" src="https://img.shields.io/badge/@meSingh9-F3EFE6?style=flat-square&logo=x&logoColor=8E7440"></a>&nbsp;
+  <a href="https://cal.com/msingh/lets-connect"><img alt="Book an intro call" src="https://img.shields.io/badge/Book%20an%20intro%20call-E3D1AC?style=flat-square&logo=googlecalendar&logoColor=0E1218"></a>&nbsp;
+  <img alt="Profile views" src="https://komarev.com/ghpvc/?username=meSingh&style=flat-square&color=F3EFE6&label=views">
 </p>
 
 ### Hi, I'm Mandeep
@@ -39,17 +40,63 @@ Some of it, in numbers I am comfortable defending:
 
 ### What I work with
 
-- **AI:** agent orchestration and evals, RAG and vector search, real-time voice (streaming STT and TTS, voice cloning), prompt and harness versioning, fine-tuning where it pays, LLM cost and unit economics.
-- **Backend:** Node.js and TypeScript, Python and FastAPI, PostgreSQL and MongoDB, Kafka, NATS, RabbitMQ, gRPC.
-- **Product:** React and Next.js, Flutter, PWAs.
-- **Platform:** GCP, AWS, Azure, Kubernetes and Docker, hybrid cloud, supply-chain security.
+**AI**<br>
+<img alt="Agents" src="https://img.shields.io/badge/Agents-F3EFE6?style=flat-square">
+<img alt="Evals" src="https://img.shields.io/badge/Evals-F3EFE6?style=flat-square">
+<img alt="RAG" src="https://img.shields.io/badge/RAG-F3EFE6?style=flat-square">
+<img alt="Real-time voice" src="https://img.shields.io/badge/Real--time%20voice-F3EFE6?style=flat-square">
+<img alt="LLMOps" src="https://img.shields.io/badge/LLMOps-F3EFE6?style=flat-square">
+<img alt="Unit economics" src="https://img.shields.io/badge/Unit%20economics-F3EFE6?style=flat-square">
+<img alt="OpenAI" src="https://img.shields.io/badge/OpenAI-F3EFE6?style=flat-square&logo=openai&logoColor=8E7440">
+<img alt="Anthropic" src="https://img.shields.io/badge/Anthropic-F3EFE6?style=flat-square&logo=anthropic&logoColor=8E7440">
+<img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-F3EFE6?style=flat-square&logo=huggingface&logoColor=8E7440">
+
+**Backend**<br>
+<img alt="Node.js" src="https://img.shields.io/badge/Node.js-F3EFE6?style=flat-square&logo=nodedotjs&logoColor=8E7440">
+<img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-F3EFE6?style=flat-square&logo=typescript&logoColor=8E7440">
+<img alt="Python" src="https://img.shields.io/badge/Python-F3EFE6?style=flat-square&logo=python&logoColor=8E7440">
+<img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-F3EFE6?style=flat-square&logo=fastapi&logoColor=8E7440">
+<img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-F3EFE6?style=flat-square&logo=postgresql&logoColor=8E7440">
+<img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-F3EFE6?style=flat-square&logo=mongodb&logoColor=8E7440">
+<img alt="Kafka" src="https://img.shields.io/badge/Kafka-F3EFE6?style=flat-square&logo=apachekafka&logoColor=8E7440">
+<img alt="NATS" src="https://img.shields.io/badge/NATS-F3EFE6?style=flat-square&logo=natsdotio&logoColor=8E7440">
+<img alt="RabbitMQ" src="https://img.shields.io/badge/RabbitMQ-F3EFE6?style=flat-square&logo=rabbitmq&logoColor=8E7440">
+<img alt="gRPC" src="https://img.shields.io/badge/gRPC-F3EFE6?style=flat-square">
+
+**Product**<br>
+<img alt="React" src="https://img.shields.io/badge/React-F3EFE6?style=flat-square&logo=react&logoColor=8E7440">
+<img alt="Next.js" src="https://img.shields.io/badge/Next.js-F3EFE6?style=flat-square&logo=nextdotjs&logoColor=8E7440">
+<img alt="Flutter" src="https://img.shields.io/badge/Flutter-F3EFE6?style=flat-square&logo=flutter&logoColor=8E7440">
+<img alt="PWA" src="https://img.shields.io/badge/PWA-F3EFE6?style=flat-square&logo=pwa&logoColor=8E7440">
+
+**Platform**<br>
+<img alt="Google Cloud" src="https://img.shields.io/badge/Google%20Cloud-F3EFE6?style=flat-square&logo=googlecloud&logoColor=8E7440">
+<img alt="AWS" src="https://img.shields.io/badge/AWS-F3EFE6?style=flat-square&logo=amazonwebservices&logoColor=8E7440">
+<img alt="Azure" src="https://img.shields.io/badge/Azure-F3EFE6?style=flat-square">
+<img alt="Kubernetes" src="https://img.shields.io/badge/Kubernetes-F3EFE6?style=flat-square&logo=kubernetes&logoColor=8E7440">
+<img alt="Docker" src="https://img.shields.io/badge/Docker-F3EFE6?style=flat-square&logo=docker&logoColor=8E7440">
+<img alt="GitHub Actions" src="https://img.shields.io/badge/GitHub%20Actions-F3EFE6?style=flat-square&logo=githubactions&logoColor=8E7440">
+<img alt="Supply-chain security" src="https://img.shields.io/badge/Supply--chain%20security-F3EFE6?style=flat-square">
 
 ### Open source
 
 Most of my work since 2021 lives in client and employer repositories. These two are the public exceptions.
 
-- **[polinrider-cleaner](https://github.com/meSingh/polinrider-cleaner)** · Detect and recover from the PolinRider supply-chain campaign across a GitHub org, a personal account or a developer machine. Shell only, zero dependencies, every destructive step is a dry run first. `Shell` · 2026
-- **[git.wtf](https://github.com/meSingh/git.wtf)** · Answers for the Git situations that make people swear. Running since 2016. `PHP` · 46 stars
+<table>
+  <tr>
+    <td width="50%"><a href="https://github.com/meSingh/polinrider-cleaner"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pin-polinrider-cleaner-dark.svg"><img alt="polinrider-cleaner" src="assets/pin-polinrider-cleaner.svg" width="100%"></picture></a></td>
+    <td width="50%"><a href="https://github.com/meSingh/git.wtf"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pin-git-wtf-dark.svg"><img alt="git.wtf" src="assets/pin-git-wtf.svg" width="100%"></picture></a></td>
+  </tr>
+</table>
+
+### Stats
+
+<table>
+  <tr>
+    <td width="50%"><a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg"><img alt="GitHub stats" src="assets/stats.svg" width="100%"></picture></a></td>
+    <td width="50%"><a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="https://github-readme-streak-stats.herokuapp.com/?user=meSingh&background=11161E&border=2B3240&ring=E3D1AC&fire=E3D1AC&currStreakNum=F6F3ED&sideNums=CBC5B3&currStreakLabel=E3D1AC&sideLabels=8F8A7E&dates=7E7A6E&border_radius=10&hide_title=true"><img alt="Contribution streak" src="https://github-readme-streak-stats.herokuapp.com/?user=meSingh&background=F7F4ED&border=D9D2C4&ring=8E7440&fire=8E7440&currStreakNum=0E1218&sideNums=3E3A33&currStreakLabel=8E7440&sideLabels=7A7568&dates=A9A392&border_radius=10&hide_title=true" width="100%"></picture></a></td>
+  </tr>
+</table>
 
 ### How I think about production AI
 
@@ -73,4 +120,4 @@ A small number of engagements a year, alongside TWINii:
 
 If one of those is you, [book an intro call](https://cal.com/msingh/lets-connect). Based in Delhi, working across UK, US and India hours.
 
-<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; the ledger above regenerates daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
+<p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; the ledger, stats and repo cards regenerate daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>

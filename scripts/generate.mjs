@@ -127,13 +127,70 @@ function ledger(T) {
   <text x="${right}" y="${yy}" text-anchor="end" font-size="22" font-weight="600" fill="${T.accent}" letter-spacing="-.3" class="rise" style="animation-delay:${d}s">${e.y}<tspan font-size="13" font-weight="500" fill="${T.micro}" letter-spacing=".08em"> Y </tspan>${e.m}<tspan font-size="13" font-weight="500" fill="${T.micro}" letter-spacing=".08em"> M</tspan></text>
   ${rule(T, colM, right, yy + 34)}`;
   });
+  rows += `<text x="${right}" y="302" text-anchor="end" font-size="12" font-weight="500" letter-spacing=".12em" fill="${T.sep}" class="rise" style="animation-delay:1.1s">REGENERATED ${esc(gh.fetched.toUpperCase())}</text>`;
+  return frame(T, { w: 1280, h: 322, body: rows, title: 'Now and still running' });
+}
+
+
+// ---------- 3. stats card, in the layout GitHub readers know ----------
+const ICON = {
+  star: 'M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z',
+  commit: 'M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z',
+  pr: 'M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z',
+  lock: 'M4 4a4 4 0 0 1 8 0v2h.25c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-5.5C2 6.784 2.784 6 3.75 6H4Zm8.25 3.5h-8.5a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25ZM10.5 6V4a2.5 2.5 0 1 0-5 0v2Z',
+  people: 'M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z',
+  repo: 'M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z',
+  fork: 'M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z',
+  clock: 'M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm7-3.25v2.992l2.028.812a.75.75 0 0 1-.557 1.392l-2.5-1A.751.751 0 0 1 7 8.25v-3.5a.75.75 0 0 1 1.5 0Z',
+};
+const icon = (T, name, x, y, delay) => `<path transform="translate(${x} ${y}) scale(1.15)" fill="${T.accent}" d="${ICON[name]}" class="rise" style="animation-delay:${delay}s"/>`;
+const fmt = (n) => n == null ? '–' : n.toLocaleString('en-GB');
+
+function statsCard(T) {
   const pct = Math.round(gh.privateContributions / gh.contributions * 100);
   const memberFor = elapsed(gh.createdAt.slice(0, 7)).y;
-  const b = (s) => `<tspan fill="${T.accent}" font-weight="600">${s}</tspan>`, dot = `<tspan fill="${T.sep}">  ·  </tspan>`;
-  rows += hairline(T, colL, right, 292, .9) + `
-  <text x="${colL}" y="324" font-size="14" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:1.05s">${b(gh.contributions.toLocaleString('en-GB'))} contributions in the last year${dot}${b(pct + '%')} of them private${dot}${b(gh.stars)} stars across ${b(gh.publicRepos)} public repos${dot}on GitHub ${b(memberFor)} years</text>
-  <text x="${right}" y="324" text-anchor="end" font-size="12" font-weight="500" letter-spacing=".12em" fill="${T.sep}" class="rise" style="animation-delay:1.1s">REGENERATED ${esc(gh.fetched.toUpperCase())}</text>`;
-  return frame(T, { w: 1280, h: 352, body: rows, title: 'Now, still running, and live GitHub numbers' });
+  const allTime = gh.scope === 'private';
+  const rows = [
+    ['star', 'Total stars earned', fmt(gh.stars)],
+    ...(allTime ? [
+      ['commit', 'Total commits', fmt(gh.allTimeCommits)],
+      ['pr', 'Total pull requests', fmt(gh.allTimePRs)],
+    ] : []),
+    ['lock', 'Contributions, last year', `${fmt(gh.contributions)}${gh.privateContributions > 0 ? `<tspan fill="${T.faint}" font-weight="500">  ·  ${pct}% private</tspan>` : ''}`],
+    ['repo', 'Public repositories', fmt(gh.publicRepos)],
+    ['people', 'Followers', fmt(gh.followers)],
+    ['clock', 'On GitHub since', `${gh.createdAt.slice(0, 4)}<tspan fill="${T.faint}" font-weight="500">  ·  ${memberFor} years</tspan>`],
+  ];
+  let body = `<text x="36" y="46" font-size="18" font-weight="600" letter-spacing="-.2" fill="${T.accent}" class="rise" style="animation-delay:.05s">Mandeep Singh's GitHub stats</text>`;
+  rows.forEach(([ic, label, value], i) => {
+    const y = 88 + i * 34, d = .2 + i * .08;
+    body += `${icon(T, ic, 36, y - 14, d)}
+  <text x="66" y="${y}" font-size="15" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:${d}s">${label}</text>
+  <text x="${626 - 36}" y="${y}" text-anchor="end" font-size="15" font-weight="600" fill="${T.text}" class="rise" style="animation-delay:${d}s">${value}</text>`;
+  });
+  return frame(T, { w: 626, h: 88 + rows.length * 34 + 4, body, title: 'GitHub stats' });
+}
+
+// ---------- 4. repo pin cards, in the layout GitHub readers know ----------
+function wrap(text, max) {
+  const words = text.split(/\s+/), lines = ['']; 
+  for (const w of words) { if ((lines[lines.length - 1] + ' ' + w).trim().length > max) lines.push(w); else lines[lines.length - 1] = (lines[lines.length - 1] + ' ' + w).trim(); }
+  return lines.slice(0, 2).map((l, i, a) => i === 1 && lines.length > 2 ? l.slice(0, max - 1) + '…' : l);
+}
+function pinCard(T, r) {
+  const desc = wrap(r.description.replace(/:[a-z_]+:/g, '').replace(/[\p{Extended_Pictographic}\uFE0F]/gu, '').replace(/\s+/g, ' ').trim(), 70);
+  let body = `${icon(T, 'repo', 36, 30, .05)}
+  <text x="64" y="46" font-size="17" font-weight="600" fill="${T.accent}" class="rise" style="animation-delay:.05s">${esc(r.name)}</text>
+  ${r.archived ? `<text x="590" y="46" text-anchor="end" class="k rise" style="animation-delay:.05s">ARCHIVED</text>` : ''}`;
+  desc.forEach((l, i) => { body += `<text x="36" y="${76 + i * 21}" font-size="14" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:${.2 + i * .08}s">${esc(l)}</text>`; });
+  const y = 76 + desc.length * 21 + 18;
+  let x = 36;
+  body += `<circle cx="${x + 6}" cy="${y - 5}" r="6" fill="${r.languageColor}" class="rise" style="animation-delay:.4s"/><text x="${x + 18}" y="${y}" font-size="13" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:.4s">${esc(r.language ?? '')}</text>`;
+  x += 18 + (r.language ?? '').length * 8 + 28;
+  body += `${icon(T, 'star', x, y - 13, .45)}<text x="${x + 24}" y="${y}" font-size="13" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:.45s">${fmt(r.stars)}</text>`;
+  x += 24 + String(r.stars).length * 8 + 28;
+  body += `${icon(T, 'fork', x, y - 13, .5)}<text x="${x + 24}" y="${y}" font-size="13" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:.5s">${fmt(r.forks)}</text>`;
+  return frame(T, { w: 626, h: y + 26, body, title: `${r.name}: ${r.description}` });
 }
 
 // ---------- write ----------
@@ -141,6 +198,11 @@ mkdirSync('assets', { recursive: true });
 const out = {
   'hero': hero(INK), 'hero-dark': hero(INK_ON_DARK),
   'ledger': ledger(PAPER), 'ledger-dark': ledger(INK_ON_DARK),
+  'stats': statsCard(PAPER), 'stats-dark': statsCard(INK_ON_DARK),
 };
+for (const r of gh.pins) {
+  const slug = 'pin-' + r.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  out[slug] = pinCard(PAPER, r); out[`${slug}-dark`] = pinCard(INK_ON_DARK, r);
+}
 for (const [name, svg] of Object.entries(out)) writeFileSync(`assets/${name}.svg`, svg);
 console.log(`wrote ${Object.keys(out).length} SVGs to assets/`);

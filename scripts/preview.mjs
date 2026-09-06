@@ -36,7 +36,7 @@ body{margin:0;background:${t.bg};color:${t.fg};font:16px/1.5 -apple-system,Blink
 .wrap{display:flex;gap:24px;padding:32px;max-width:1280px;box-sizing:border-box}
 .side{width:296px;flex-shrink:0}.side img{width:296px;height:296px;border-radius:50%;border:1px solid ${t.border}}
 .card{flex:1;min-width:0;border:1px solid ${t.border};border-radius:6px;padding:16px}
-.card img{max-width:100%;display:block}
+.card img{max-width:100%;vertical-align:middle}.card img[width="100%"]{display:block}
 a{color:${t.link};text-decoration:none}p{margin:0 0 16px}ul{margin:0 0 16px;padding-left:32px}li{margin:4px 0}
 h3{font-size:20px;font-weight:600;margin:24px 0 16px;line-height:1.25}
 blockquote{margin:0 0 16px;padding:0 16px;border-left:4px solid ${t.border};color:${t.quote}}
