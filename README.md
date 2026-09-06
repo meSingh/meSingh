@@ -59,6 +59,7 @@ Some of it, in numbers I am comfortable defending:
 <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white">
 <img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
 <img alt="PHP" src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white">
+<img alt="Go" src="https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white">
 <img alt="Shell" src="https://img.shields.io/badge/Shell-4EAA25?style=flat-square&logo=gnubash&logoColor=white">
 <img alt="SQL" src="https://img.shields.io/badge/SQL-555555?style=flat-square">
 <img alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white">
@@ -70,6 +71,8 @@ Some of it, in numbers I am comfortable defending:
 <img alt="Express" src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white">
 <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white">
 <img alt="Laravel" src="https://img.shields.io/badge/Laravel-FF2D20?style=flat-square&logo=laravel&logoColor=white">
+<img alt="Symfony" src="https://img.shields.io/badge/Symfony-000000?style=flat-square&logo=symfony&logoColor=white">
+<img alt="Zend" src="https://img.shields.io/badge/Zend-68B604?style=flat-square&logo=zend&logoColor=white">
 <img alt="Deno" src="https://img.shields.io/badge/Deno-000000?style=flat-square&logo=deno&logoColor=white">
 <img alt="GraphQL" src="https://img.shields.io/badge/GraphQL-E10098?style=flat-square&logo=graphql&logoColor=white">
 <img alt="REST / OpenAPI" src="https://img.shields.io/badge/REST%20/%20OpenAPI-6BA539?style=flat-square&logo=openapiinitiative&logoColor=white">
