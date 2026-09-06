@@ -13,23 +13,7 @@
   <img alt="Profile views" src="https://komarev.com/ghpvc/?username=meSingh&style=flat-square&label=views">
 </p>
 
-<div align="center">
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=20&duration=2600&pause=900&color=C9D1D9&center=true&vCenter=true&width=640&height=40&lines=Real-time+voice+agents;Agent+reliability+in+production;LLMOps%2C+evals+and+guardrails;AI+unit+economics;Supply-chain+security+for+AI+teams;Fractional+CTO+for+seed+to+Series+B"><img alt="Real-time voice agents · Agent reliability in production · LLMOps, evals and guardrails · AI unit economics" src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=20&duration=2600&pause=900&color=1F2328&center=true&vCenter=true&width=640&height=40&lines=Real-time+voice+agents;Agent+reliability+in+production;LLMOps%2C+evals+and+guardrails;AI+unit+economics;Supply-chain+security+for+AI+teams;Fractional+CTO+for+seed+to+Series+B" /></picture>
-
-<sub>Chief Architect at TWINii · Fractional CTO · The layer after the demo</sub>
-
-<br/><br/>
-
-**Using right now**&nbsp;&nbsp;
-<img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-0969da?style=flat-square&logo=anthropic&logoColor=white" />
-<img alt="OpenAI" src="https://img.shields.io/badge/OpenAI-0969da?style=flat-square&logo=openai&logoColor=white" />
-<img alt="Gemini" src="https://img.shields.io/badge/Gemini-0969da?style=flat-square&logo=googlegemini&logoColor=white" />
-<img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-0969da?style=flat-square&logo=huggingface&logoColor=white" />
-<img alt="promptfoo" src="https://img.shields.io/badge/promptfoo-0969da?style=flat-square" />
-<img alt="Wispr Flow" src="https://img.shields.io/badge/Wispr%20Flow-0969da?style=flat-square" />
-
-</div>
+<p align="center"><sub>Chief Architect at TWINii · Fractional CTO and AI production advisor · The layer after the demo</sub></p>
 
 ### Hi, I'm Mandeep
 
@@ -53,6 +37,13 @@ Some of it, in numbers I am comfortable defending:
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/still-running-box-dark.svg"><img alt="Still running: Chief Architect at TWINii day counter; Shiprocket integrations core, ValueLabs refactor and git.wtf time in production; contributions in the last year." src="assets/still-running-box.svg" width="100%"></picture>
 
+### What I work on
+
+- **Production AI:** real-time voice agents, agent orchestration, retrieval-augmented generation, evals, guardrails, LLMOps, prompt and harness versioning, fine-tuning, AI unit economics, multilingual AI.
+- **AI architecture:** streaming speech-to-text and text-to-speech, voice cloning, agent memory and durable state, tool use, observability, cost control, zero-downtime migrations.
+- **Systems:** Node.js and TypeScript, Python and FastAPI, PostgreSQL, MongoDB, Redis, RabbitMQ, React and Next.js, Flutter, Google Cloud, AWS, Azure, Kubernetes, Docker, hybrid cloud.
+- **Leadership:** fractional CTO, production-readiness reviews, technical due diligence for AI products, spec-driven development, software supply-chain security, engineering standards for AI-assisted teams.
+
 ### Stats
 
 <a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=meSingh&theme=github-dark-blue&hide_border=true&card_width=896"><img alt="Contribution streak" src="https://streak-stats.demolab.com/?user=meSingh&theme=default&hide_border=true&card_width=896" width="100%"></picture></a>
@@ -66,5 +57,25 @@ A small number of engagements a year, alongside TWINii:
 - **Technical due diligence** on AI products, for the people writing the cheque.
 
 If one of those is you, [book an intro call](https://cal.com/msingh/lets-connect). Based in Delhi, working across UK, US and India hours.
+
+<p align="center"><sub>Tools I use daily</sub><br>
+<img alt="Claude" src="https://img.shields.io/badge/Claude-555555?style=flat-square&logo=anthropic&logoColor=white" />
+<img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-555555?style=flat-square&logo=anthropic&logoColor=white" />
+<img alt="OpenAI" src="https://img.shields.io/badge/OpenAI-555555?style=flat-square&logo=openai&logoColor=white" />
+<img alt="Gemini" src="https://img.shields.io/badge/Gemini-555555?style=flat-square&logo=googlegemini&logoColor=white" />
+<img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-555555?style=flat-square&logo=huggingface&logoColor=white" />
+<img alt="promptfoo" src="https://img.shields.io/badge/promptfoo-555555?style=flat-square" />
+<img alt="Wispr Flow" src="https://img.shields.io/badge/Wispr%20Flow-555555?style=flat-square" />
+<img alt="OpenArt" src="https://img.shields.io/badge/OpenArt-555555?style=flat-square" />
+<img alt="Adobe Firefly" src="https://img.shields.io/badge/Adobe%20Firefly-555555?style=flat-square" />
+<img alt="Notion" src="https://img.shields.io/badge/Notion-555555?style=flat-square&logo=notion&logoColor=white" />
+<img alt="Figma" src="https://img.shields.io/badge/Figma-555555?style=flat-square&logo=figma&logoColor=white" />
+<img alt="Playwright" src="https://img.shields.io/badge/Playwright-555555?style=flat-square" />
+<img alt="GitHub Actions" src="https://img.shields.io/badge/GitHub%20Actions-555555?style=flat-square&logo=githubactions&logoColor=white" />
+<img alt="Docker" src="https://img.shields.io/badge/Docker-555555?style=flat-square&logo=docker&logoColor=white" />
+<img alt="Vercel" src="https://img.shields.io/badge/Vercel-555555?style=flat-square&logo=vercel&logoColor=white" />
+<img alt="Netlify" src="https://img.shields.io/badge/Netlify-555555?style=flat-square&logo=netlify&logoColor=white" />
+<img alt="Cal.com" src="https://img.shields.io/badge/Cal.com-555555?style=flat-square&logo=caldotcom&logoColor=white" />
+</p>
 
 <p align="center"><sub>Mandeep Singh &nbsp;·&nbsp; Greater Delhi Area &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; cards update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
