@@ -127,7 +127,7 @@ function stillRunning(G) {
     ...facts.still_running.map(r => ['clock', r.what, `${dur(r.since)} in production`]),
     ['commit', 'Contributions, last year', gh.contributions.toLocaleString('en-US')],
   ];
-  const w = 495, h = 55 + rows.length * 25 + 14;
+  const w = 495, h = 55 + rows.length * 25 + 20;
   let body = `<style>
   .header { font: 600 18px ${GRS_FONT}; fill: ${G.title} }
   .stat { font: 600 14px ${GRS_FONT}; fill: ${G.text} }
@@ -138,7 +138,7 @@ function stillRunning(G) {
 <g transform="translate(25, 35)"><svg class="icon" x="0" y="-14" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="${OCT.pulse}"/></svg><text x="25" y="0" class="header">Still running</text><text x="${w - 25}" y="0" text-anchor="end" class="gray">updated ${esc(gh.fetched)}</text></g>
 <g transform="translate(0, 55)">`;
   rows.forEach(([ic, label, value], i) => {
-    body += `\n  <g transform="translate(25, ${i * 25})"><svg class="icon" viewBox="0 0 16 16" width="16" height="16" x="0" y="-13"><path fill-rule="evenodd" d="${OCT[ic]}"/></svg><text class="stat" x="25" y="0">${esc(label)}</text><text class="stat" x="${w - 25}" y="0" text-anchor="end">${esc(value)}</text></g>`;
+    body += `\n  <g transform="translate(25, ${i * 25})"><svg class="icon" viewBox="0 0 16 16" width="16" height="16" x="0" y="-1"><path fill-rule="evenodd" d="${OCT[ic]}"/></svg><text class="stat" x="25" y="12.5">${esc(label)}</text><text class="stat" x="${w - 25}" y="12.5" text-anchor="end">${esc(value)}</text></g>`;
   });
   body += '\n</g>';
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" fill="none" role="img" aria-labelledby="titleId">

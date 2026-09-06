@@ -114,21 +114,9 @@ Some of it, in numbers I am comfortable defending:
 <img alt="Hybrid cloud" src="https://img.shields.io/badge/Hybrid%20cloud-555555?style=flat-square">
 <img alt="Cloud cost optimisation" src="https://img.shields.io/badge/Cloud%20cost%20optimisation-555555?style=flat-square">
 
-**Practice**<br>
-<img alt="Supply-chain security" src="https://img.shields.io/badge/Supply--chain%20security-555555?style=flat-square">
-<img alt="Spec-driven development" src="https://img.shields.io/badge/Spec--driven%20development-555555?style=flat-square">
-<img alt="Observability" src="https://img.shields.io/badge/Observability-555555?style=flat-square">
-<img alt="Load testing" src="https://img.shields.io/badge/Load%20testing-555555?style=flat-square">
-<img alt="Performance tuning" src="https://img.shields.io/badge/Performance%20tuning-555555?style=flat-square">
-<img alt="Zero-downtime migrations" src="https://img.shields.io/badge/Zero--downtime%20migrations-555555?style=flat-square">
-<img alt="Technical due diligence" src="https://img.shields.io/badge/Technical%20due%20diligence-555555?style=flat-square">
-<img alt="Playwright" src="https://img.shields.io/badge/Playwright-2EAD33?style=flat-square">
-<img alt="Git" src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white">
-
 ### Stats
 
-<a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="profile-summary-card-output/github_dark/3-stats.svg"><img alt="GitHub stats" src="profile-summary-card-output/default/3-stats.svg" width="40%" align="top"></picture></a>
-<a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=meSingh&theme=github-dark-blue&hide_border=true"><img alt="Contribution streak" src="https://streak-stats.demolab.com/?user=meSingh&theme=default&hide_border=true" width="58%" align="top"></picture></a>
+<a href="https://github.com/meSingh"><picture><source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=meSingh&theme=github-dark-blue&hide_border=true&card_width=896"><img alt="Contribution streak" src="https://streak-stats.demolab.com/?user=meSingh&theme=default&hide_border=true&card_width=896" width="100%"></picture></a>
 
 ### Working together
 
