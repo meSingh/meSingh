@@ -1,27 +1,18 @@
 {
-  "fetched": "2026-10-10",
+  "fetched": "2026-10-11",
   "scope": "private",
   "createdAt": "2012-09-18",
   "followers": 45,
   "publicRepos": 33,
   "stars": 125,
-  "forks": 45,
-  "contributions": 1879,
-  "privateContributions": 1510,
+  "forks": 44,
+  "contributions": 1959,
+  "privateContributions": 1590,
   "commitsLastYear": 315,
   "prsLastYear": 39,
   "reviewsLastYear": 0,
   "reposContributed": 11,
   "weeks": [
-    [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
     [
       0,
       0,
@@ -123,7 +114,7 @@
     ],
     [
       0,
-      2,
+      4,
       0,
       0,
       0,
@@ -134,9 +125,9 @@
       4,
       0,
       1,
-      1,
-      1,
       2,
+      2,
+      3,
       10
     ],
     [
@@ -188,7 +179,7 @@
       0,
       0,
       5,
-      12,
+      13,
       0,
       0,
       0
@@ -488,16 +479,19 @@
       34,
       13,
       6,
-      3
+      27
+    ],
+    [
+      50
     ]
   ],
-  "firstDay": "2025-10-05",
+  "firstDay": "2025-10-12",
   "pins": [
     {
       "name": "polinrider-cleaner",
       "description": "Detect and clean up after the PolinRider supply-chain campaign — GitHub organizations, personal accounts, and macOS/Linux/Windows machines. Shell only, dry-run by default.",
       "stars": 3,
-      "forks": 5,
+      "forks": 4,
       "language": "Shell",
       "languageColor": "#89e051",
       "archived": false,
@@ -514,6 +508,6 @@
       "pushed": "2021-07-19"
     }
   ],
-  "allTimeCommits": 7582,
+  "allTimeCommits": 7657,
   "allTimePRs": 514
 }
