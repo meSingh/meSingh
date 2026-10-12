@@ -1,15 +1,15 @@
 {
-  "fetched": "2026-10-11",
+  "fetched": "2026-10-12",
   "scope": "private",
   "createdAt": "2012-09-18",
   "followers": 45,
   "publicRepos": 33,
   "stars": 125,
   "forks": 44,
-  "contributions": 1959,
-  "privateContributions": 1590,
-  "commitsLastYear": 315,
-  "prsLastYear": 39,
+  "contributions": 2017,
+  "privateContributions": 1642,
+  "commitsLastYear": 318,
+  "prsLastYear": 42,
   "reviewsLastYear": 0,
   "reposContributed": 11,
   "weeks": [
@@ -482,7 +482,8 @@
       27
     ],
     [
-      50
+      90,
+      18
     ]
   ],
   "firstDay": "2025-10-12",
@@ -492,10 +493,10 @@
       "description": "Detect and clean up after the PolinRider supply-chain campaign — GitHub organizations, personal accounts, and macOS/Linux/Windows machines. Shell only, dry-run by default.",
       "stars": 3,
       "forks": 4,
-      "language": "Shell",
-      "languageColor": "#89e051",
+      "language": "Rust",
+      "languageColor": "#dea584",
       "archived": false,
-      "pushed": "2026-10-10"
+      "pushed": "2026-10-11"
     },
     {
       "name": "git.wtf",
@@ -508,6 +509,6 @@
       "pushed": "2021-07-19"
     }
   ],
-  "allTimeCommits": 7657,
-  "allTimePRs": 514
+  "allTimeCommits": 7712,
+  "allTimePRs": 517
 }
