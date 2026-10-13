@@ -1,15 +1,15 @@
 {
-  "fetched": "2026-10-12",
+  "fetched": "2026-10-13",
   "scope": "private",
   "createdAt": "2012-09-18",
   "followers": 45,
   "publicRepos": 33,
   "stars": 125,
   "forks": 44,
-  "contributions": 2017,
-  "privateContributions": 1642,
-  "commitsLastYear": 318,
-  "prsLastYear": 42,
+  "contributions": 2073,
+  "privateContributions": 1667,
+  "commitsLastYear": 335,
+  "prsLastYear": 56,
   "reviewsLastYear": 0,
   "reposContributed": 11,
   "weeks": [
@@ -483,20 +483,21 @@
     ],
     [
       90,
-      18
+      28,
+      46
     ]
   ],
   "firstDay": "2025-10-12",
   "pins": [
     {
       "name": "polinrider-cleaner",
-      "description": "Detect and clean up after the PolinRider supply-chain campaign — GitHub organizations, personal accounts, and macOS/Linux/Windows machines. Shell only, dry-run by default.",
+      "description": "Detect and clean up after the PolinRider supply-chain campaign: GitHub organizations, personal accounts and macOS, Linux and Windows machines. One binary, dry-run by default.",
       "stars": 3,
       "forks": 4,
       "language": "Rust",
       "languageColor": "#dea584",
       "archived": false,
-      "pushed": "2026-10-11"
+      "pushed": "2026-10-13"
     },
     {
       "name": "git.wtf",
@@ -509,6 +510,6 @@
       "pushed": "2021-07-19"
     }
   ],
-  "allTimeCommits": 7712,
-  "allTimePRs": 517
+  "allTimeCommits": 7753,
+  "allTimePRs": 532
 }
