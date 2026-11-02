@@ -137,10 +137,9 @@ ${lines(nx + 22, top + 94, st.short, { size: 14.5, lh: 21, fill: mu })}`;
 const CAL = 'M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z';
 function button(T, { label, w = 300, h = 52 }) {
   // Ink on light, white on dark (Mandeep, 3 Nov); a calendar at the left, an orange arrow at the right.
-  const dark = T === DARK, fill = dark ? '#f4f2ee' : '#1b1f23', base = dark ? '#b9b6ae' : '#000000', fg = dark ? '#1b1f23' : '#f4f2ee', cy = (h - 3) / 2;
-  const b = `<rect x="0" y="3" width="${w}" height="${h - 3}" rx="10" fill="${base}"/>
-<rect x=".5" y=".5" width="${w - 1}" height="${h - 4}" rx="10" fill="${fill}" stroke="${dark ? '#d8d5cd' : fill}"/>
-<rect x="2" y="2" width="${w - 4}" height="${(h - 4) / 2}" rx="9" fill="#ffffff" fill-opacity="${dark ? .35 : .06}"/>
+  const dark = T === DARK, fill = dark ? '#f4f2ee' : '#1b1f23', fg = dark ? '#1b1f23' : '#f4f2ee', cy = (h - 3) / 2;
+  // Flat: no base rect, no highlight (Mandeep, 3 Nov).
+  const b = `<rect x=".5" y=".5" width="${w - 1}" height="${h - 4}" rx="10" fill="${fill}" stroke="${dark ? '#d8d5cd' : fill}"/>
 <g transform="translate(22 ${cy - 10}) scale(1.25)"><path d="${CAL}" fill="${fg}"/></g>
 <text x="58" y="${cy + 6}" font-size="16" font-weight="600" letter-spacing="-.01em" fill="${fg}">${esc(label)}</text>
 <text x="${w - 24}" y="${cy + 6}" text-anchor="middle" font-size="16" font-weight="600" fill="${T.acc}">→</text>`;
@@ -206,7 +205,7 @@ function activity(T) {
 function stack(T) {
   const L = facts.stack.layers, w = W, step = 44, indent = 72, y0 = 72, h = y0 + L.length * step + 10;
   let b = `<text x="0" y="24" class="mono" font-size="12" font-weight="500" letter-spacing=".16em" fill="${T.acc}">THE STACK I ARCHITECT</text>
-<text x="${w}" y="24" text-anchor="end" class="mono" font-size="11" letter-spacing=".1em" fill="${T.muted}">TOP TO BOTTOM · WHAT I OWN IN EACH LAYER</text>`;
+<text x="${w}" y="24" text-anchor="end" class="mono" font-size="11" letter-spacing=".1em" fill="${T.muted}">WHAT I OWN IN EACH LAYER</text>`;
   // the stair: along each row's rule for one indent, then down to the next row
   let path = `M0 ${y0 + 12}`;
   L.forEach((l, i) => {

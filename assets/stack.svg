@@ -8,7 +8,7 @@ text{font-family:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-fon
 @media (prefers-reduced-motion: reduce){*{animation:none!important}}
 </style></defs>
 <text x="0" y="24" class="mono" font-size="12" font-weight="500" letter-spacing=".16em" fill="#d9600a">THE STACK I ARCHITECT</text>
-<text x="1280" y="24" text-anchor="end" class="mono" font-size="11" letter-spacing=".1em" fill="#59636e">TOP TO BOTTOM · WHAT I OWN IN EACH LAYER</text><line x1="0" y1="84" x2="1280" y2="84" stroke="#d1d9e0"/>
+<text x="1280" y="24" text-anchor="end" class="mono" font-size="11" letter-spacing=".1em" fill="#59636e">WHAT I OWN IN EACH LAYER</text><line x1="0" y1="84" x2="1280" y2="84" stroke="#d1d9e0"/>
 <text x="14" y="72" class="mono" font-size="11" letter-spacing=".14em" fill="#d9600a">04</text>
 <text x="52" y="73" font-size="17" font-weight="600" letter-spacing="-.015em" fill="#1f2328">Product and release</text>
 <text x="256.4" y="73" font-size="14" fill="#59636e">Release gates, enterprise answers, cost per task</text><line x1="72" y1="128" x2="1280" y2="128" stroke="#d1d9e0"/>

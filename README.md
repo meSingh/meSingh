@@ -48,6 +48,7 @@ The work is agents, retrieval and real-time voice, with the evals, guardrails an
 <img alt="OpenAI" src="https://img.shields.io/badge/OpenAI-555555?style=flat-square&logo=openai&logoColor=white" />
 <img alt="Gemini" src="https://img.shields.io/badge/Gemini-555555?style=flat-square&logo=googlegemini&logoColor=white" />
 <img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-555555?style=flat-square&logo=huggingface&logoColor=white" />
+<img alt="MCP" src="https://img.shields.io/badge/MCP-555555?style=flat-square&logo=modelcontextprotocol&logoColor=white" />
 <img alt="promptfoo" src="https://img.shields.io/badge/promptfoo-555555?style=flat-square" />
 <img alt="Wispr Flow" src="https://img.shields.io/badge/Wispr%20Flow-555555?style=flat-square" />
 <img alt="Notion" src="https://img.shields.io/badge/Notion-555555?style=flat-square&logo=notion&logoColor=white" />

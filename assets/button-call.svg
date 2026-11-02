@@ -7,9 +7,7 @@ text{font-family:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-fon
 
 @media (prefers-reduced-motion: reduce){*{animation:none!important}}
 </style></defs>
-<rect x="0" y="3" width="300" height="49" rx="10" fill="#000000"/>
 <rect x=".5" y=".5" width="299" height="48" rx="10" fill="#1b1f23" stroke="#1b1f23"/>
-<rect x="2" y="2" width="296" height="24" rx="9" fill="#ffffff" fill-opacity="0.06"/>
 <g transform="translate(22 14.5) scale(1.25)"><path d="M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z" fill="#f4f2ee"/></g>
 <text x="58" y="30.5" font-size="16" font-weight="600" letter-spacing="-.01em" fill="#f4f2ee">Book a 20-minute call</text>
 <text x="276" y="30.5" text-anchor="middle" font-size="16" font-weight="600" fill="#d9600a">→</text>
