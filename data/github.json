@@ -1,17 +1,17 @@
 {
   "fetched": "2026-11-02",
-  "scope": "local",
+  "scope": "private",
   "createdAt": "2012-09-18",
   "followers": 43,
   "publicRepos": 33,
   "stars": 122,
   "forks": 43,
-  "contributions": 2819,
-  "privateContributions": 1,
-  "commitsLastYear": 2354,
-  "prsLastYear": 407,
-  "reviewsLastYear": 20,
-  "reposContributed": 78,
+  "contributions": 2820,
+  "privateContributions": 2370,
+  "commitsLastYear": 355,
+  "prsLastYear": 77,
+  "reviewsLastYear": 0,
+  "reposContributed": 11,
   "weeks": [
     [
       0,
@@ -484,7 +484,7 @@
     [
       97,
       19,
-      0
+      1
     ]
   ],
   "firstDay": "2025-11-02",
@@ -510,6 +510,6 @@
       "pushed": "2021-07-19"
     }
   ],
-  "allTimeCommits": 8468,
+  "allTimeCommits": 8469,
   "allTimePRs": 634
 }
