@@ -134,22 +134,25 @@ ${lines(nx + 22, top + 94, st.short, { size: 14.5, lh: 21, fill: mu })}`;
 }
 
 // ---------- 5. button: the call to action ----------
+const CAL = 'M4.75 0a.75.75 0 0 1 .75.75V2h5V.75a.75.75 0 0 1 1.5 0V2h1.25c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25V3.75C1 2.784 1.784 2 2.75 2H4V.75A.75.75 0 0 1 4.75 0ZM2.5 7.5v6.75c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V7.5Zm10.75-4H2.75a.25.25 0 0 0-.25.25V6h11V3.75a.25.25 0 0 0-.25-.25Z';
 function button(T, { label, w = 300, h = 52 }) {
-  // Ink, the website button's colourway b: white label, orange arrow, a darker base for depth.
-  // On the dark page the button inverts: white with ink text (Mandeep, 3 Nov).
-  const dark = T === DARK, fill = dark ? '#f4f2ee' : '#1b1f23', base = dark ? '#b9b6ae' : '#000000', label_ = dark ? '#1b1f23' : '#f4f2ee';
+  // Ink on light, white on dark (Mandeep, 3 Nov); a calendar at the left, an orange arrow at the right.
+  const dark = T === DARK, fill = dark ? '#f4f2ee' : '#1b1f23', base = dark ? '#b9b6ae' : '#000000', fg = dark ? '#1b1f23' : '#f4f2ee', cy = (h - 3) / 2;
   const b = `<rect x="0" y="3" width="${w}" height="${h - 3}" rx="10" fill="${base}"/>
 <rect x=".5" y=".5" width="${w - 1}" height="${h - 4}" rx="10" fill="${fill}" stroke="${dark ? '#d8d5cd' : fill}"/>
 <rect x="2" y="2" width="${w - 4}" height="${(h - 4) / 2}" rx="9" fill="#ffffff" fill-opacity="${dark ? .35 : .06}"/>
-<text x="${w / 2 - 10}" y="${(h - 3) / 2 + 6}" text-anchor="middle" font-size="16" font-weight="600" letter-spacing="-.01em" fill="${label_}">${esc(label)}</text>
-<text x="${w - 24}" y="${(h - 3) / 2 + 6}" text-anchor="middle" font-size="16" font-weight="600" fill="${T.acc}">→</text>`;
+<g transform="translate(22 ${cy - 10}) scale(1.25)"><path d="${CAL}" fill="${fg}"/></g>
+<text x="58" y="${cy + 6}" font-size="16" font-weight="600" letter-spacing="-.01em" fill="${fg}">${esc(label)}</text>
+<text x="${w - 24}" y="${cy + 6}" text-anchor="middle" font-size="16" font-weight="600" fill="${T.acc}">→</text>`;
   return svg({ w, h, body: b, title: label });
 }
-
-function ghost(T, { label, w = 220, h = 52 }) {
-  const b = `<rect x=".5" y=".5" width="${w - 1}" height="${h - 4}" rx="10" fill="${T.chip}" stroke="${T.border}"/>
-<text x="${w / 2 - 10}" y="${(h - 3) / 2 + 6}" text-anchor="middle" font-size="16" font-weight="600" letter-spacing="-.01em" fill="${T.fg}">${esc(label)}</text>
-<text x="${w - 24}" y="${(h - 3) / 2 + 6}" text-anchor="middle" font-size="16" font-weight="600" fill="${T.muted}">→</text>`;
+function ghost(T, { label, w = 236, h = 52 }) {
+  // Border only, no fill; the site's "m." glyph at the left.
+  const cy = (h - 3) / 2;
+  const b = `<rect x=".5" y=".5" width="${w - 1}" height="${h - 4}" rx="10" fill="none" stroke="${T.border}"/>
+<text x="31" y="${cy + 8}" text-anchor="middle" font-family="Geist" font-weight="700" font-size="22" letter-spacing="-.04em" fill="${T.fg}">m<tspan fill="${T.acc}">.</tspan></text>
+<text x="58" y="${cy + 6}" font-size="16" font-weight="600" letter-spacing="-.01em" fill="${T.fg}">${esc(label)}</text>
+<text x="${w - 24}" y="${cy + 6}" text-anchor="middle" font-size="16" font-weight="600" fill="${T.muted}">→</text>`;
   return svg({ w, h, body: b, title: label });
 }
 
