@@ -1,1 +1,8 @@
+# local-only: design canvas, research screenshots, previews, rejected v1
+archive/
+canvas/
+research/
+preview/
+mandeep-singh-github-profile.html
 .DS_Store
+.claude/
