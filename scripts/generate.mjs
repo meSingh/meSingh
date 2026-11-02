@@ -118,7 +118,7 @@ function tickets(T) {
   let b = `<text x="0" y="16" class="mono" font-size="13" font-weight="500" letter-spacing=".16em" fill="${T.acc}">HOW I CAN HELP</text>
 <text x="${w}" y="16" text-anchor="end" font-size="14" font-weight="600" fill="${T.acc}">${esc(o.lead)}  →</text>`;
   o.stops.forEach((st, i) => {
-    const x = i * (tw + gap), lead = i === 0;
+    const x = i * (tw + gap), lead = false; // all three tickets in the same quiet colourway (Mandeep, 3 Nov)
     const bg = lead ? T.acc : T.card, fg = lead ? '#ffffff' : T.fg, mu = lead ? 'rgba(255,255,255,.8)' : T.muted, bd = lead ? T.acc : T.border;
     // the ticket outline with two notches at the perforation
     const nx = x + stub, cy1 = top, cy2 = top + th;

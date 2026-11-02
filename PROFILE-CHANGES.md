@@ -1,3 +1,7 @@
+# GitHub profile v8.1 (3 Nov 2026, live)
+
+After the first live look: the contribution heatmap is out of the README (still generated, with the bars, in case it returns); the three tickets share one quiet colourway, no orange first ticket.
+
 # GitHub profile v8 (3 Nov 2026): tickets in, website glyph, the quiet button back
 
 Addendum, same night: Mandeep picked the orange Website button (colourway a, now `social-site*.svg`) and asked for the call button in black: `button()` is ink with a white label, an orange arrow and a black base; the quiet help button is unchanged.

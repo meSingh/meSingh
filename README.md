@@ -36,8 +36,6 @@ The work is agents, retrieval and real-time voice, with the evals, guardrails an
 - **HumanFirewall:** first product live in 45 days, as Acting CTO.
 - **Balluun:** five years as Solutions Architect for a Silicon Valley B2B market network, through its cloud-native migration.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/heatmap-dark.svg"><img alt="Contributions in the last year, day by day" src="assets/heatmap.svg" width="100%"></picture>
-
 <p>
   <a href="https://msingh.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/social-site-dark.svg"><img alt="msingh.com" src="assets/social-site.svg" height="48"></picture></a>&nbsp;
   <a href="https://www.linkedin.com/in/mesingh9/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/social-linkedin-dark.svg"><img alt="LinkedIn, in/mesingh9" src="assets/social-linkedin.svg" height="48"></picture></a>&nbsp;
