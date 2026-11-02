@@ -15,6 +15,7 @@ function inline(s) {
 function render(md) {
   md = md.replace(/<picture>\s*<source media="\(prefers-color-scheme: dark\)" srcset="([^"]+)">\s*<img ([^>]*?)src="([^"]+)"([^>]*)>\s*<\/picture>/g,
     (m, darkSrc, pre, lightSrc, post) => `<img ${pre}src="../${mode === 'dark' ? darkSrc : lightSrc}"${post}>`);
+  md = md.replace(/^(<a [^>]*>)(<img [^>]*width="100%"[^>]*>)<\/a>$/gm, '$1$2</a>\n');
   const lines = md.split('\n'); let out = '', i = 0;
   while (i < lines.length) {
     const l = lines[i];
@@ -24,7 +25,7 @@ function render(md) {
     if (l.startsWith('- ')) { out += '<ul>'; while (i < lines.length && lines[i].startsWith('- ')) out += `<li>${inline(lines[i++].slice(2))}</li>`; out += '</ul>\n'; continue; }
     if (l.startsWith('> ')) { out += `<blockquote>${inline(l.slice(2))}</blockquote>\n`; i++; continue; }
     if (l.trim() === '') { i++; continue; }
-    let p = ''; while (i < lines.length && lines[i].trim() !== '' && !/^(### |- |> |\s*<)/.test(lines[i])) p += lines[i++] + ' ';
+    let p = ''; while (i < lines.length && lines[i].trim() !== '' && (!/^(### |- |> |\s*<)/.test(lines[i]) || (p.trim().endsWith('&nbsp;') && /^\s*<img/.test(lines[i])))) p += lines[i++] + ' ';
     out += `<p>${inline(p.trim())}</p>\n`;
   }
   return out;

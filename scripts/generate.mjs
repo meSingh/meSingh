@@ -1,180 +1,244 @@
 // Generates every SVG in assets/ from data/facts.json (hand-maintained) and data/github.json (fetched).
-// GitHub renders README SVGs inside <img>: no scripts, no external fetches, but CSS keyframes, SMIL
-// and @font-face data URIs all work. Everything below is self-contained.
+// GitHub renders README SVGs inside <img>: no scripts, no external fetches, but CSS keyframes and @font-face
+// data URIs work. Everything below is self-contained.
 //
-// Two images: the ink banner (the profile's header image) and the Still running box, drawn with GitHub's own
-// Primer colours and geometry so it reads as part of the page. Everything else is native markdown or a
-// default card from the standard tools.
+// Profile v6 (3 Nov 2026). No banner. Transparent pieces placed between the paragraphs, in the language of the
+// LinkedIn slides (the orange dot dither, Geist, mono caps):
+//   strip      a dither rule, dense orange at the left dissolving to nothing
+//   status     a row of chips: the roles, the two numbers, the live TWINii day count last
+//   social     brand buttons for msingh.com, LinkedIn and X, each wrapped in its link in the README
+//   offers     How I can help as three calm columns: on your team, one-time, how it starts
+//   button     the call to action as a real button
+//   years      sixteen years as sixteen blocks, the last six in orange
+//   heatmap    the last year of contributions as GitHub's own calendar grid, in orange
+//   activity   the same year as thin bars (kept as the alternative)
+//   capabilities four columns, the vocabulary of the work
+// Each piece has a light and a dark variant (text colours follow GitHub's Primer themes).
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const facts = JSON.parse(readFileSync('data/facts.json', 'utf8'));
 const gh = JSON.parse(readFileSync('data/github.json', 'utf8'));
 const FONT = readFileSync('scripts/geist-fontface.css', 'utf8');
+const FAVICON = readFileSync('scripts/favicon.svg', 'utf8').replace(/<svg[^>]*>|<\/svg>/g, ''); // the site's own icon, 32 x 32
 const NOW = new Date(gh.fetched + 'T12:00:00Z');
-
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-function lift(d) { return (hex) => { const n = parseInt(hex.slice(1), 16); const f = (v) => Math.min(255, v + d); return '#' + ((f(n >> 16) << 16) | (f((n >> 8) & 255) << 8) | f(n & 255)).toString(16).padStart(6, '0'); }; }
 
-// ---------- themes (Ink & Ivory, from BRAND-SPEC.md) ----------
-const INK = {
-  stops: ['#0E1218', '#1A2029', '#161C25', '#0C1015'],
-  washes: `<rect width="100%" height="100%" fill="url(#warm)"/><rect width="100%" height="100%" fill="url(#cool)"/><rect width="100%" height="100%" fill="url(#ground)"/>`,
-  grain: .9, border: '#E9DBC4', borderA: .12, hair: '#E9DBC4', hairA: .16, lead: '#D9C49E', leadA: .7, rule: '#E9DBC4', ruleA: .09, edge: '#E3D1AC', edgeA: .28,
-  text: '#F6F3ED', dim: '#C4C0B6', accent: '#E3D1AC', accent2: '#E8D6B2', micro: '#C3BCA9', proof: '#CBC5B3', sep: '#7E7A6E', wm: '#F1ECE2', faint: '#8F8A7E',
-};
-// GitHub dark chrome is #0d1117: lift the floor six points and strengthen the hairline so the card keeps an edge
-const INK_ON_DARK = { ...INK, stops: INK.stops.map(lift(6)), borderA: .22 };
-const PAPER = {
-  stops: ['#FCFAF6', '#F7F4ED', '#F4F0E7', '#EFEADF'],
-  washes: `<rect width="100%" height="100%" fill="url(#paperwarm)"/>`,
-  grain: .5, border: '#0E1218', borderA: .14, hair: '#0E1218', hairA: .14, lead: '#9A7F4A', leadA: .9, rule: '#0E1218', ruleA: .08, edge: '#9A7F4A', edgeA: .35,
-  text: '#0E1218', dim: '#4E4A42', accent: '#8E7440', accent2: '#7C6436', micro: '#6B665B', proof: '#3E3A33', sep: '#A9A392', wm: '#0E1218', faint: '#7A7568',
-};
+const LIGHT = { fg: '#1f2328', muted: '#59636e', faint: 'rgba(31,35,40,.38)', border: '#d1d9e0', chip: '#f6f8fa', card: '#ffffff', acc: '#d9600a', ember: '#b8520a', bar: '#1f2328', cell: '#eaeef2' };
+const DARK = { fg: '#f0f6fc', muted: '#9198a1', faint: 'rgba(240,246,252,.35)', border: '#3d444d', chip: '#151b23', card: '#0d1117', acc: '#ff7a1a', ember: '#8a3d0c', bar: '#f0f6fc', cell: '#1f2731' };
 
-// ---------- date helpers ----------
 function ym(s) { const [y, m] = s.split('-').map(Number); return new Date(Date.UTC(y, m - 1, 1)); }
-function elapsed(sinceYM) {
-  const a = ym(sinceYM);
-  const months = (NOW.getUTCFullYear() - a.getUTCFullYear()) * 12 + (NOW.getUTCMonth() - a.getUTCMonth());
-  return { y: Math.floor(months / 12), m: months % 12 };
-}
-function daysSince(sinceYM) { return Math.floor((NOW - ym(sinceYM)) / 86400000); }
+const daysSince = (s) => Math.floor((NOW - ym(s)) / 86400000);
 
-// ---------- frame ----------
-function frame(T, { w, h, body, extraCss = '', title }) {
+const W = 1280;
+function svg({ w = W, h, body, title, css = '' }) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}">
 <title>${esc(title)}</title>
-<defs>
-  <style>
+<defs><style>
 ${FONT}
-    text{font-family:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-    .wm{font-size:22px;font-weight:600;letter-spacing:.22em;fill:${T.wm}}
-    .k{font-size:12px;font-weight:500;letter-spacing:.16em;fill:${T.sep}}
-    .v{font-size:17px;font-weight:500;fill:${T.proof}}
-    .rise{opacity:0;animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
-    @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-    .draw{stroke-dasharray:1 1;animation:draw 1.4s cubic-bezier(.4,0,.2,1) forwards}
-    @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-${extraCss}
-    @media (prefers-reduced-motion: reduce){.rise,.pop,.draw{opacity:1;animation:none;stroke-dashoffset:0}.sweep,.bar{animation:none}}
-  </style>
-  <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="${T.stops[0]}"/><stop offset=".42" stop-color="${T.stops[1]}"/><stop offset=".74" stop-color="${T.stops[2]}"/><stop offset="1" stop-color="${T.stops[3]}"/>
-  </linearGradient>
-  <radialGradient id="warm" cx="84%" cy="-4%" r="90%"><stop offset="0" stop-color="#E4D2B2" stop-opacity=".13"/><stop offset=".45" stop-color="#E4D2B2" stop-opacity=".03"/><stop offset=".7" stop-color="#E4D2B2" stop-opacity="0"/></radialGradient>
-  <radialGradient id="cool" cx="4%" cy="2%" r="70%"><stop offset="0" stop-color="#7E94B4" stop-opacity=".085"/><stop offset="1" stop-color="#7E94B4" stop-opacity="0"/></radialGradient>
-  <radialGradient id="ground" cx="12%" cy="118%" r="60%"><stop offset="0" stop-color="#E4D2B2" stop-opacity=".09"/><stop offset="1" stop-color="#E4D2B2" stop-opacity="0"/></radialGradient>
-  <radialGradient id="paperwarm" cx="90%" cy="0%" r="80%"><stop offset="0" stop-color="#E3D1AC" stop-opacity=".45"/><stop offset=".6" stop-color="#E3D1AC" stop-opacity="0"/></radialGradient>
-  <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".07"/></feComponentTransfer></filter>
-  <clipPath id="card"><rect width="${w}" height="${h}" rx="14"/></clipPath>
-</defs>
-<g clip-path="url(#card)">
-  <rect width="${w}" height="${h}" fill="url(#field)"/>
-  ${T.washes}
-  <rect width="${w}" height="${h}" filter="url(#grain)" opacity="${T.grain}"/>
+text{font-family:Geist,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.mono{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+${css}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style></defs>
 ${body}
-  <rect x="0" y="${h - 1}" width="${w}" height="1" fill="${T.edge}" opacity="${T.edgeA}"/>
-</g>
-<rect x=".5" y=".5" width="${w - 1}" height="${h - 1}" rx="13.5" fill="none" stroke="${T.border}" stroke-opacity="${T.borderA}"/>
 </svg>
 `;
 }
+const lines = (x, y, arr, { size = 14, lh = 22, fill, weight = 400 } = {}) => arr.map((t, i) => `<text x="${x}" y="${y + i * lh}" font-size="${size}" font-weight="${weight}" fill="${fill}">${esc(t)}</text>`).join('');
 
-const hairline = (T, x1, x2, y, delay = 0) => `
-  <line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${T.hair}" stroke-opacity="${T.hairA}" pathLength="1" class="draw" style="animation-delay:${delay}s"/>
-  <line x1="${x1}" y1="${y}" x2="${x1 + 152}" y2="${y}" stroke="${T.lead}" stroke-opacity="${T.leadA}" pathLength="1" class="draw" style="animation-delay:${delay}s"/>`;
-const rule = (T, x1, x2, y) => `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${T.rule}" stroke-opacity="${T.ruleA}"/>`;
-
-// ---------- 1. hero (always ink) ----------
-function hero(T) {
-  const [l1, l2a, l2b] = facts.statement;
-  const proof = facts.proof_row.map(esc).join(`<tspan fill="${T.sep}">  ·  </tspan>`);
-  const y0 = 386;
-  let d = `M72 ${y0}`;
-  for (let x = 72; x < 1208; x += 96) d += ` H${x + 52} l7 -16 l7 30 l7 -14 H${x + 96}`;
-  const body = `
-  <text x="72" y="62" class="wm rise" style="animation-delay:.05s">MANDEEP SINGH<tspan fill="${T.accent}">.</tspan></text>
-  <text x="1208" y="62" text-anchor="end" font-size="18" font-weight="500" fill="${T.micro}" class="rise" style="animation-delay:.2s">${esc(facts.role_line)}</text>
-  ${hairline(T, 72, 1208, 96, .25)}
-  <text x="72" y="192" font-size="60" font-weight="600" letter-spacing="-1.3" fill="${T.text}" class="rise" style="animation-delay:.5s">${esc(l1)}</text>
-  <text x="72" y="262" font-size="60" font-weight="600" letter-spacing="-1.3" class="rise" style="animation-delay:.8s"><tspan fill="${T.dim}" font-weight="500">${esc(l2a)}</tspan> <tspan fill="${T.accent}">${esc(l2b)}</tspan></text>
-  <text x="72" y="342" font-size="19" font-weight="500" fill="${T.proof}" class="rise" style="animation-delay:1.2s">${proof}</text>
-  <text x="1208" y="342" text-anchor="end" font-size="21" font-weight="600" fill="${T.accent2}" class="rise" style="animation-delay:1.3s">${esc(facts.site)}</text>
-  <path d="${d}" fill="none" stroke="${T.hair}" stroke-opacity=".10" stroke-width="1.2" stroke-linejoin="round"/>
-  <path d="${d}" fill="none" stroke="${T.accent}" stroke-opacity=".75" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" pathLength="1000" stroke-dasharray="90 910" class="sweep"/>`;
-  return frame(T, { w: 1280, h: 400, body, title: `${facts.name}. ${facts.statement.join(' ')}`,
-    extraCss: `.sweep{animation:sweep 7s linear infinite;animation-delay:1.6s;stroke-dashoffset:1000}@keyframes sweep{from{stroke-dashoffset:1000}to{stroke-dashoffset:-1000}}` });
+// ---------- 1. the strip ----------
+const B8 = [[0, 32, 8, 40, 2, 34, 10, 42], [48, 16, 56, 24, 50, 18, 58, 26], [12, 44, 4, 36, 14, 46, 6, 38], [60, 28, 52, 20, 62, 30, 54, 22], [3, 35, 11, 43, 1, 33, 9, 41], [51, 19, 59, 27, 49, 17, 57, 25], [15, 47, 7, 39, 13, 45, 5, 37], [63, 31, 55, 23, 61, 29, 53, 21]];
+function strip(T, { h = 24, px = 6, x1 = 1000, power = 1.4 } = {}) {
+  let dots = '';
+  for (let y = 0; y < h; y += px) for (let x = 0; x < x1; x += px) {
+    const v = Math.pow(Math.max(0, 1 - x / x1), power), th = (B8[(y / px) & 7][(x / px) & 7] + 0.5) / 64;
+    const c = v > th ? T.acc : v * 1.9 > th ? T.ember : null;
+    if (c) dots += `<circle cx="${x + px / 2}" cy="${y + px / 2}" r="${(px * 0.36).toFixed(1)}" fill="${c}"/>`;
+  }
+  return svg({ h, body: dots, title: 'A rule of orange dots fading out to the right.' });
 }
 
-
-
-// ---------- 2. "Still running": a Primer-style box, like GitHub's own status-checks list ----------
-// Colours and geometry from GitHub's Primer design system (Box, Box-header, Box-row, octicons), so it reads
-// as part of GitHub rather than as a third-party card.
-const PRIMER_LIGHT = { bg: '#ffffff', header: '#f6f8fa', border: '#d0d7de', text: '#1f2328', muted: '#57606a', green: '#1a7f37', blue: '#0969da', accentBg: '#dafbe1' };
-const PRIMER_DARK  = { bg: '#0d1117', header: '#161b22', border: '#30363d', text: '#e6edf3', muted: '#8b949e', green: '#3fb950', blue: '#58a6ff', accentBg: '#12261e' };
-const PRIMER_FONT = `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif`;
-const OCT = {
-  checkFill: 'M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z',
-  dotFill: 'M8 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z',
-  pulse: 'M6 2c.306 0 .582.187.696.471L10 10.731l1.304-3.26A.751.751 0 0 1 12 7h3.25a.75.75 0 0 1 0 1.5h-2.742l-1.812 4.528a.751.751 0 0 1-1.392 0L6 4.77 4.696 8.03A.75.75 0 0 1 4 8.5H.75a.75.75 0 0 1 0-1.5h2.742l1.812-4.529A.751.751 0 0 1 6 2Z',
-  rocket: 'M14.064 0h.186C15.216 0 16 .784 16 1.75v.186a8.752 8.752 0 0 1-2.564 6.186l-.458.459c-.314.314-.641.616-.979.904v3.207c0 .608-.315 1.172-.833 1.49l-2.774 1.707a.749.749 0 0 1-1.11-.418l-.954-3.102a1.214 1.214 0 0 1-.145-.125L3.754 9.816a1.218 1.218 0 0 1-.124-.145L.528 8.717a.749.749 0 0 1-.418-1.11l1.71-2.774A1.748 1.748 0 0 1 3.31 4h3.204c.288-.338.59-.665.904-.979l.459-.458A8.749 8.749 0 0 1 14.064 0ZM8.938 3.623h-.002l-.458.458c-.76.76-1.437 1.598-2.02 2.5l-1.5 2.317 2.143 2.143 2.317-1.5c.902-.583 1.74-1.26 2.499-2.02l.459-.458a7.25 7.25 0 0 0 2.123-5.127V1.75a.25.25 0 0 0-.25-.25h-.186a7.249 7.249 0 0 0-5.125 2.123ZM3.56 14.56c-.732.732-2.334 1.045-3.005 1.148a.234.234 0 0 1-.201-.064.234.234 0 0 1-.064-.201c.103-.671.416-2.273 1.15-3.003a1.502 1.502 0 1 1 2.12 2.12Zm6.94-3.935c-.088.06-.177.118-.266.175l-2.35 1.521.548 1.783 1.949-1.2a.25.25 0 0 0 .119-.213ZM3.678 8.116 5.2 5.766c.058-.09.117-.178.176-.266H3.309a.25.25 0 0 0-.213.119l-1.2 1.95ZM12 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z',
-};
-function stillRunning(P) {
+// ---------- 2. status: the roles first, the live chip last ----------
+function status(T) {
   const role = facts.now.find(n => n.count);
-  const month = (s) => ym(s).toLocaleString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
-  const dur = (since) => { const e = elapsed(since); return `${e.y} yr${e.y === 1 ? '' : 's'} ${e.m} mo${e.m === 1 ? '' : 's'}`; };
-  const rows = [
-    ...facts.still_running.map(r => ({ icon: 'checkFill', color: P.green, name: r.what, note: r.detail, right: `Active · ${dur(r.since)}`, since: `since ${month(r.since)}` })),
-    { icon: 'rocket', color: P.blue, name: role.v, note: 'current engagement', right: `Day ${daysSince(role.since).toLocaleString('en-US')}`, since: `since ${month(role.since)}` },
-  ];
-  const w = 896, headerH = 44, rowH = 52, footerH = 40;
-  const h = headerH + rows.length * rowH + footerH;
-  let body = `<style>
-  text { font-family: ${PRIMER_FONT}; }
-  .h { font-size: 14px; font-weight: 600; fill: ${P.text} }
-  .hm { font-size: 12px; fill: ${P.muted} }
-  .name { font-size: 14px; font-weight: 600; fill: ${P.text} }
-  .note { font-size: 12px; fill: ${P.muted} }
-  .right { font-size: 13px; font-weight: 600; fill: ${P.text} }
-  .since { font-size: 12px; fill: ${P.muted} }
-</style>
-<rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="6" fill="${P.bg}" stroke="${P.border}"/>
-<path d="M0.5 6.5a6 6 0 0 1 6-6h${w - 13}a6 6 0 0 1 6 6v${headerH - 6.5}h-${w - 1}z" fill="${P.header}"/>
-<line x1="0.5" y1="${headerH}" x2="${w - .5}" y2="${headerH}" stroke="${P.border}"/>
-<g transform="translate(16, ${headerH / 2 - 8})"><path fill="${P.muted}" d="${OCT.pulse}"/></g>
-<text x="40" y="${headerH / 2 + 5}" class="h">Still running</text>
-<text x="${w - 16}" y="${headerH / 2 + 5}" text-anchor="end" class="hm">${rows.length} systems · updated ${esc(gh.fetched)}</text>`;
-  rows.forEach((r, i) => {
-    const y = headerH + i * rowH;
-    body += `
-<g transform="translate(0, ${y})">
-  ${i ? `<line x1="0.5" y1="0" x2="${w - .5}" y2="0" stroke="${P.border}"/>` : ''}
-  <g transform="translate(16, ${rowH / 2 - 8})"><path fill="${r.color}" d="${OCT[r.icon]}"/></g>
-  <text x="44" y="${rowH / 2 - 2}" class="name">${esc(r.name)}</text>
-  <text x="44" y="${rowH / 2 + 15}" class="note">${esc(r.note)}</text>
-  <text x="${w - 16}" y="${rowH / 2 - 2}" text-anchor="end" class="right" fill="${r.color}">${esc(r.right)}</text>
-  <text x="${w - 16}" y="${rowH / 2 + 15}" text-anchor="end" class="since">${esc(r.since)}</text>
-</g>`;
+  const chips = [...facts.chips.map((t, i) => ({ text: t, strong: i === 0 })), { live: true, text: `Currently ${role.v}  ·  day ${daysSince(role.since).toLocaleString('en-US')}` }];
+  const h = 40, pad = 16, gap = 10, cw = 8.75;
+  let x = 0, body = '';
+  for (const c of chips) {
+    const w = Math.round(pad * 2 + c.text.length * cw + (c.live ? 16 : 0));
+    body += `<rect x="${x + .5}" y="4.5" width="${w - 1}" height="${h - 9}" rx="${(h - 9) / 2}" fill="${T.chip}" stroke="${T.border}"/>`;
+    if (c.live) body += `<circle cx="${x + pad + 4}" cy="${h / 2}" r="4" fill="${T.acc}"><animate attributeName="opacity" values="1;.35;1" dur="2.4s" repeatCount="indefinite"/></circle>`;
+    body += `<text x="${x + pad + (c.live ? 16 : 0)}" y="${h / 2 + 4.5}" class="mono" font-size="13" font-weight="500" letter-spacing=".06em" fill="${c.strong || c.live ? T.fg : T.muted}">${esc(c.text)}</text>`;
+    x += w + gap;
+  }
+  return svg({ w: Math.max(x - gap, 1), h, body, title: chips.map(c => c.text).join('; ') });
+}
+
+// ---------- 3. social: brand buttons, the way the platforms draw their own ----------
+const LOGO = {
+  linkedin: `<rect x="2" y="9" width="4" height="13"/><circle cx="4" cy="4.5" r="2.5"/><path d="M9 9h3.8v1.8c.6-1.1 2-2.1 4.1-2.1 4.3 0 5.1 2.8 5.1 6.5V22h-4v-6c0-1.5 0-3.4-2.1-3.4s-2.4 1.6-2.4 3.3V22H9z"/>`,
+  x: `<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>`,
+  site: `<text x="12" y="19.5" text-anchor="middle" font-family="Geist" font-weight="700" font-size="24" letter-spacing="-.04em" fill="currentColor">m<tspan fill="var(--dot, currentColor)">.</tspan></text>`,
+};
+function social(T, { brand, label, sub, site }) {
+  const spec = { site: site || { bg: T.acc, fg: '#ffffff', dot: '#ffffff' }, linkedin: { bg: '#0A66C2', fg: '#ffffff' }, x: { bg: T === DARK ? '#f0f6fc' : '#0f1419', fg: T === DARK ? '#0f1419' : '#ffffff' } }[brand];
+  const h = 48, w = Math.round(64 + Math.max(label.length * 9.4, sub.length * 7.2) + 20);
+  const body = `<rect x="${spec.border ? .5 : 0}" y="${spec.border ? .5 : 0}" width="${spec.border ? w - 1 : w}" height="${spec.border ? h - 1 : h}" rx="10" fill="${spec.bg}"${spec.border ? ` stroke="${spec.border}"` : ''}/>
+<g transform="translate(18 12)" fill="${spec.fg}" color="${spec.fg}" style="--dot:${spec.dot || spec.fg}">${LOGO[brand]}</g>
+<text x="56" y="${h / 2 - 2}" font-size="15" font-weight="600" letter-spacing="-.01em" fill="${spec.fg}">${esc(label)}</text>
+<text x="56" y="${h / 2 + 15}" class="mono" font-size="11.5" letter-spacing=".02em" fill="${spec.fg}" fill-opacity=".8">${esc(sub)}</text>`;
+  return svg({ w, h, body, title: `${label}: ${sub}` });
+}
+
+// ---------- 4. offers: How I can help as a route with three stations ----------
+// Transparent ground. One orange line runs left to right through three stations: the call is where you
+// board, one engagement, then on your team, which is how teams move in practice. Linked to how-i-help.
+function offers(T) {
+  const o = facts.offers, w = W, h = 250, y = 118;
+  const xs = [100, 520, 940];
+  let b = `<text x="0" y="24" class="mono" font-size="12" font-weight="500" letter-spacing=".16em" fill="${T.acc}">HOW I CAN HELP</text>
+<text x="${w}" y="24" text-anchor="end" font-size="13" font-weight="600" fill="${T.acc}">${esc(o.lead)}  →</text>
+<line x1="0" y1="${y}" x2="${w}" y2="${y}" stroke="${T.acc}" stroke-width="3" stroke-linecap="round"/>
+<line x1="0" y1="${y}" x2="${xs[0] - 22}" y2="${y}" stroke="${T.border}" stroke-width="3" stroke-dasharray="3 8" stroke-linecap="round"/>`;
+  for (let x = 40; x < w; x += 40) if (Math.min(...xs.map(s => Math.abs(s - x))) > 30) b += `<line x1="${x}" y1="${y - 5}" x2="${x}" y2="${y + 5}" stroke="${T.acc}" stroke-opacity=".5"/>`;
+  o.stops.forEach((st, i) => {
+    const x = xs[i], last = i === o.stops.length - 1;
+    b += `<circle cx="${x}" cy="${y}" r="14" fill="${T.card}" stroke="${T.acc}" stroke-width="3"/>${last ? `<circle cx="${x}" cy="${y}" r="6" fill="${T.acc}"/>` : ''}
+<text x="${x - 26}" y="${y - 54}" class="mono" font-size="11" letter-spacing=".14em" fill="${T.acc}">${st.n}</text>
+<text x="${x - 26}" y="${y - 30}" font-size="20" font-weight="600" letter-spacing="-.015em" fill="${T.fg}">${esc(st.h)}</text>
+<text x="${x - 26 + st.h.length * 11 + 14}" y="${y - 30}" class="mono" font-size="11" letter-spacing=".12em" fill="${T.muted}">${esc(st.tag)}</text>
+${lines(x - 26, y + 40, st.lines, { size: 13, lh: 19, fill: T.muted })}`;
   });
-  const fy = headerH + rows.length * rowH;
-  body += `
-<line x1="0.5" y1="${fy}" x2="${w - .5}" y2="${fy}" stroke="${P.border}"/>
-<text x="16" y="${fy + footerH / 2 + 4}" class="note"><tspan class="right" fill="${P.text}">${gh.contributions.toLocaleString('en-US')}</tspan> contributions in the last year${gh.scope === 'public' && gh.privateContributions > 0 ? ` · ${Math.round(gh.privateContributions / gh.contributions * 100)}% in private repositories` : ''}</text>
-<text x="${w - 16}" y="${fy + footerH / 2 + 4}" text-anchor="end" class="note">The integrations core built at Shiprocket in 2016 is still the hub today.</text>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-labelledby="titleId">
-<title id="titleId">Still running: ${esc(rows.map(r => `${r.name}, ${r.right}`).join('; '))}</title>
-${body}
-</svg>
-`;
+  return svg({ h, body: b, title: `How I can help: ${o.stops.map(s => s.h).join(', then ')}.` });
+}
+
+// ---------- 4b. offers as three tickets with a perforated stub (the alternative) ----------
+function tickets(T) {
+  const o = facts.offers, w = W, h = 206, gap = 20, tw = (w - gap * 2) / 3, th = 166, top = 30, stub = 80, r = 9;
+  let b = `<text x="0" y="16" class="mono" font-size="13" font-weight="500" letter-spacing=".16em" fill="${T.acc}">HOW I CAN HELP</text>
+<text x="${w}" y="16" text-anchor="end" font-size="14" font-weight="600" fill="${T.acc}">${esc(o.lead)}  →</text>`;
+  o.stops.forEach((st, i) => {
+    const x = i * (tw + gap), lead = i === 0;
+    const bg = lead ? T.acc : T.card, fg = lead ? '#ffffff' : T.fg, mu = lead ? 'rgba(255,255,255,.8)' : T.muted, bd = lead ? T.acc : T.border;
+    // the ticket outline with two notches at the perforation
+    const nx = x + stub, cy1 = top, cy2 = top + th;
+    const d = `M${x + r} ${top} H${nx - r} A${r} ${r} 0 0 0 ${nx + r} ${top} H${x + tw - r} Q${x + tw} ${top} ${x + tw} ${top + r} V${cy2 - r} Q${x + tw} ${cy2} ${x + tw - r} ${cy2} H${nx + r} A${r} ${r} 0 0 0 ${nx - r} ${cy2} H${x + r} Q${x} ${cy2} ${x} ${cy2 - r} V${top + r} Q${x} ${top} ${x + r} ${top} Z`;
+    b += `<path d="${d}" fill="${bg}" stroke="${bd}"/>
+<line x1="${nx}" y1="${top + r + 4}" x2="${nx}" y2="${cy2 - r - 4}" stroke="${lead ? 'rgba(255,255,255,.6)' : T.border}" stroke-dasharray="3 5"/>
+<text x="${x + stub / 2}" y="${top + th / 2 + 15}" text-anchor="middle" font-size="42" font-weight="600" letter-spacing="-.04em" fill="${lead ? '#ffffff' : 'none'}" stroke="${lead ? 'none' : T.acc}" stroke-width="1.1">${st.n}</text>
+<text x="${nx + 22}" y="${top + 32}" class="mono" font-size="12" letter-spacing=".14em" fill="${mu}">${esc(st.tag)}</text>
+<text x="${nx + 22}" y="${top + 64}" font-size="23" font-weight="600" letter-spacing="-.02em" fill="${fg}">${esc(st.h)}</text>
+${lines(nx + 22, top + 94, st.short, { size: 14.5, lh: 21, fill: mu })}`;
+  });
+  return svg({ h, body: b, title: `How I can help: ${o.stops.map(s => s.h).join(', then ')}.` });
+}
+
+// ---------- 5. button: the call to action ----------
+function button(T, { label, w = 300, h = 52 }) {
+  // Ink, the website button's colourway b: white label, orange arrow, a darker base for depth.
+  // On the dark page the button inverts: white with ink text (Mandeep, 3 Nov).
+  const dark = T === DARK, fill = dark ? '#f4f2ee' : '#1b1f23', base = dark ? '#b9b6ae' : '#000000', label_ = dark ? '#1b1f23' : '#f4f2ee';
+  const b = `<rect x="0" y="3" width="${w}" height="${h - 3}" rx="10" fill="${base}"/>
+<rect x=".5" y=".5" width="${w - 1}" height="${h - 4}" rx="10" fill="${fill}" stroke="${dark ? '#d8d5cd' : fill}"/>
+<rect x="2" y="2" width="${w - 4}" height="${(h - 4) / 2}" rx="9" fill="#ffffff" fill-opacity="${dark ? .35 : .06}"/>
+<text x="${w / 2 - 10}" y="${(h - 3) / 2 + 6}" text-anchor="middle" font-size="16" font-weight="600" letter-spacing="-.01em" fill="${label_}">${esc(label)}</text>
+<text x="${w - 24}" y="${(h - 3) / 2 + 6}" text-anchor="middle" font-size="16" font-weight="600" fill="${T.acc}">→</text>`;
+  return svg({ w, h, body: b, title: label });
+}
+
+function ghost(T, { label, w = 220, h = 52 }) {
+  const b = `<rect x=".5" y=".5" width="${w - 1}" height="${h - 4}" rx="10" fill="${T.chip}" stroke="${T.border}"/>
+<text x="${w / 2 - 10}" y="${(h - 3) / 2 + 6}" text-anchor="middle" font-size="16" font-weight="600" letter-spacing="-.01em" fill="${T.fg}">${esc(label)}</text>
+<text x="${w - 24}" y="${(h - 3) / 2 + 6}" text-anchor="middle" font-size="16" font-weight="600" fill="${T.muted}">→</text>`;
+  return svg({ w, h, body: b, title: label });
+}
+
+// ---------- 6. terms: the advanced terms as a slow marquee ----------
+function terms(T) {
+  const line = facts.terms.join('   ·   ');
+  const h = 36, adv = 9.3, len = Math.round((line.length + 7) * adv);
+  const text = (x) => `<text x="${x}" y="${h / 2 + 5}" class="mono" font-size="14" font-weight="500" letter-spacing=".14em" fill="${T.muted}">${esc(line)}<tspan fill="${T.acc}">   ·   </tspan></text>`;
+  const body = `<defs><linearGradient id="fade" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".06" stop-color="#fff"/><stop offset=".94" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><mask id="m"><rect width="${W}" height="${h}" fill="url(#fade)"/></mask></defs>
+<g mask="url(#m)"><g class="run">${text(0)}${text(len)}${text(len * 2)}</g></g>`;
+  return svg({ h, body, title: facts.terms.join(', '), css: `.run{animation:run ${Math.round(len / 28)}s linear infinite}@keyframes run{to{transform:translateX(-${len}px)}}` });
+}
+
+// ---------- 7. heatmap: the calendar grid, in orange ----------
+function heatmap(T) {
+  const weeks = gh.weeks, cols = weeks.length, cell = 20, gap = 4, step = cell + gap, top = 28, left = 0;
+  const w = W, scale = (w - left) / (cols * step - gap), max = Math.max(1, ...weeks.flat());
+  let b = '';
+  const first = new Date(gh.firstDay + 'T00:00:00Z');
+  weeks.forEach((wk, i) => wk.forEach((v, j) => {
+    const x = left + i * step * scale, y = top + j * step * scale, s = cell * scale;
+    const t = v ? Math.sqrt(v / max) : 0;
+    b += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${s.toFixed(1)}" height="${s.toFixed(1)}" rx="3" fill="${v ? T.acc : T.cell}" fill-opacity="${v ? (0.25 + 0.75 * t).toFixed(2) : 1}"/>`;
+  }));
+  let lastMonth = -1;
+  weeks.forEach((_, i) => { const d = new Date(first.getTime() + i * 7 * 86400000); if (d.getUTCMonth() !== lastMonth) { lastMonth = d.getUTCMonth(); if (i > 0 && i < cols - 2) b += `<text x="${(left + i * step * scale).toFixed(1)}" y="16" class="mono" font-size="11" letter-spacing=".08em" fill="${T.muted}">${d.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }).toUpperCase()}</text>`; } });
+  const h = top + 7 * step * scale + 34;
+  b += `<text x="0" y="${h - 6}" class="mono" font-size="12" letter-spacing=".1em" fill="${T.muted}"><tspan fill="${T.fg}" font-weight="500">${gh.contributions.toLocaleString('en-US')}</tspan> CONTRIBUTIONS IN THE LAST YEAR</text>
+<text x="${w}" y="${h - 6}" text-anchor="end" class="mono" font-size="12" letter-spacing=".1em" fill="${T.muted}">${gh.allTimeCommits.toLocaleString('en-US')} COMMITS ALL TIME · UPDATED ${esc(gh.fetched)}</text>`;
+  return svg({ h: Math.round(h), body: b, title: `${gh.contributions} contributions in the last year.` });
+}
+
+// ---------- 8. activity: thin bars (the alternative) ----------
+function activity(T) {
+  const weeks = gh.weeks.map(w => w.reduce((a, b) => a + b, 0));
+  const sq = weeks.map(Math.sqrt), max = Math.max(1, ...sq), h = 96, top = 8, base = 60, bw = 14, gap = (W - weeks.length * bw) / (weeks.length - 1);
+  let bars = '';
+  weeks.forEach((v, i) => {
+    const bh = Math.max(2, Math.round((sq[i] / max) * (base - top))), recent = i >= weeks.length - 8;
+    bars += `<rect x="${(i * (bw + gap)).toFixed(1)}" y="${base - bh}" width="${bw}" height="${bh}" rx="1.5" fill="${recent ? T.acc : T.bar}" fill-opacity="${recent ? .95 : .2 + .5 * (sq[i] / max)}"/>`;
+  });
+  const body = `${bars}<rect x="0" y="${base}" width="${W}" height="1" fill="${T.faint}"/>
+<text x="0" y="${h - 6}" class="mono" font-size="12" letter-spacing=".1em" fill="${T.muted}"><tspan fill="${T.fg}" font-weight="500">${gh.contributions.toLocaleString('en-US')}</tspan> CONTRIBUTIONS IN THE LAST YEAR</text>
+<text x="${W}" y="${h - 6}" text-anchor="end" class="mono" font-size="12" letter-spacing=".1em" fill="${T.muted}">${gh.allTimeCommits.toLocaleString('en-US')} COMMITS ALL TIME · UPDATED ${esc(gh.fetched)}</text>`;
+  return svg({ h, body, title: `${gh.contributions} contributions in the last year.` });
+}
+
+// ---------- 9. stack: the layers of an AI system as a staircase of rows ----------
+// Transparent ground. Four rows step down and to the right, top layer first; one orange line takes the
+// stairs with them. Typographic, not a diagram: an index of the layers and what I own in each.
+function stack(T) {
+  const L = facts.stack.layers, w = W, step = 44, indent = 72, y0 = 72, h = y0 + L.length * step + 10;
+  let b = `<text x="0" y="24" class="mono" font-size="12" font-weight="500" letter-spacing=".16em" fill="${T.acc}">THE STACK I ARCHITECT</text>
+<text x="${w}" y="24" text-anchor="end" class="mono" font-size="11" letter-spacing=".1em" fill="${T.muted}">TOP TO BOTTOM · WHAT I OWN IN EACH LAYER</text>`;
+  // the stair: along each row's rule for one indent, then down to the next row
+  let path = `M0 ${y0 + 12}`;
+  L.forEach((l, i) => {
+    const x = i * indent, y = y0 + i * step;
+    path += ` H${x + indent}` + (i < L.length - 1 ? ` V${y + step + 12}` : '');
+    b += `<line x1="${x}" y1="${y + 12}" x2="${w}" y2="${y + 12}" stroke="${T.border}"/>
+<text x="${x + 14}" y="${y}" class="mono" font-size="11" letter-spacing=".14em" fill="${T.acc}">0${L.length - i}</text>
+<text x="${x + 52}" y="${y + 1}" font-size="17" font-weight="600" letter-spacing="-.015em" fill="${T.fg}">${esc(l.h)}</text>
+<text x="${x + 52 + l.h.length * 9.6 + 22}" y="${y + 1}" font-size="14" fill="${T.muted}">${esc(l.items.join(' · '))}</text>`;
+  });
+  b += `<path d="${path}" fill="none" stroke="${T.acc}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+  return svg({ h, body: b, title: `The stack I architect: ${L.map(l => `${l.h} (${l.items.join(', ')})`).join('; ')}.` });
 }
 
 // ---------- write ----------
 mkdirSync('assets', { recursive: true });
-const out = {
-  'hero': hero(INK), 'hero-dark': hero(INK_ON_DARK),
-  'still-running-box': stillRunning(PRIMER_LIGHT), 'still-running-box-dark': stillRunning(PRIMER_DARK),
-};
-for (const [name, svg] of Object.entries(out)) writeFileSync(`assets/${name}.svg`, svg);
-
+const S = facts.social;
+const out = {};
+for (const [name, T] of [['', LIGHT], ['-dark', DARK]]) {
+  out[`strip${name}`] = strip(T);
+  out[`status${name}`] = status(T);
+  out[`offers${name}`] = offers(T);
+  out[`offers-tickets${name}`] = tickets(T);
+  out[`button-call${name}`] = button(T, { label: 'Book a 20-minute call' });
+  out[`button-help${name}`] = ghost(T, { label: 'How I can help' });
+  // website button colour combinations, for Mandeep to pick from (3 Nov)
+  const V = { a: { bg: T.acc, fg: '#ffffff', dot: '#ffffff' }, b: { bg: '#1b1f23', fg: '#f4f2ee', dot: T.acc }, c: { bg: T === DARK ? '#f4f2ee' : '#ffffff', fg: '#1b1f23', dot: T.acc, border: T.border }, d: { bg: '#efede8', fg: '#1b1f23', dot: '#d9600a' } };
+  for (const [k, v] of Object.entries(V)) out[`social-site-${k}${name}`] = social(T, { brand: 'site', label: S.site.label, sub: S.site.sub, site: v });
+  out[`terms${name}`] = terms(T);
+  out[`heatmap${name}`] = heatmap(T);
+  out[`activity${name}`] = activity(T);
+  out[`stack${name}`] = stack(T);
+  out[`social-site${name}`] = social(T, { brand: 'site', label: S.site.label, sub: S.site.sub });
+  out[`social-linkedin${name}`] = social(T, { brand: 'linkedin', label: S.linkedin.label, sub: S.linkedin.sub });
+  out[`social-x${name}`] = social(T, { brand: 'x', label: S.x.label, sub: S.x.sub });
+}
+for (const [name, s] of Object.entries(out)) writeFileSync(`assets/${name}.svg`, s);
 console.log(`wrote ${Object.keys(out).length} SVGs to assets/`);

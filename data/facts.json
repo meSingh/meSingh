@@ -1,20 +1,68 @@
 {
-  "_comment": "Hand-maintained facts. Every value here traces to ABOUT_MANDEEP.md in the Documents root. Dates are YYYY-MM.",
+  "_comment": "Hand-maintained facts. Every value here traces to ABOUT_MANDEEP.md in mSingh.com/context. Dates are YYYY-MM. Profile v4 (3 Nov 2026): statement, chips and terms follow the LinkedIn slides.",
   "name": "Mandeep Singh",
   "handle": "meSingh",
   "site": "msingh.com",
-  "intro_call": "https://cal.com/msingh/lets-connect",
+  "intro_call": "https://msingh.com/connect-with-me",
   "statement": [
-    "Your AI demo impressed the room.",
-    "Now it has to",
-    "survive production."
+    "Where AI stops being a feature",
+    "and becomes a system."
   ],
-  "role_line": "Chief Architect, TWINii  ·  Fractional CTO",
-  "proof_row": [
-    "Production AI",
-    "Agent reliability",
-    "Supply-chain security"
+  "role_line": "AI architect  ·  Fractional CTO  ·  16 years shipping",
+  "chips": [
+    "16+ years shipping software",
+    "6+ years in Production AI"
   ],
+  "offers": {
+    "_source": "site/content/home-b.ts HH, 3 Nov 2026; hints only, the site carries the full list",
+    "lead": "Know more on msingh.com/how-i-help",
+    "stops": [
+      {
+        "n": "01",
+        "h": "Start with a call",
+        "tag": "20 MINUTES",
+        "lines": [
+          "We scope the problem on the call, so you",
+          "know the timeline and the deliverable",
+          "before anything starts."
+        ],
+        "short": [
+          "We scope the problem on the call.",
+          "You know the timeline and the",
+          "deliverable up front."
+        ]
+      },
+      {
+        "n": "02",
+        "h": "One engagement",
+        "tag": "1 TO 4 WEEKS",
+        "lines": [
+          "A review before you scale, an audit when",
+          "someone wants proof, due diligence before",
+          "the wire. Each one ends in a document."
+        ],
+        "short": [
+          "A review, an audit or due diligence.",
+          "Each one ends in a document."
+        ]
+      },
+      {
+        "n": "03",
+        "h": "On your team",
+        "tag": "ONGOING",
+        "lines": [
+          "Part-time, embedded, as long as you need me.",
+          "The title is yours; the job is the hard",
+          "technical calls, taken with you, in writing."
+        ],
+        "short": [
+          "Part-time, embedded, as long as",
+          "you need me. The hard technical",
+          "calls, taken with you."
+        ]
+      }
+    ]
+  },
   "now": [
     {
       "k": "Role",
@@ -24,11 +72,11 @@
     },
     {
       "k": "Also",
-      "v": "Fractional CTO & AI production advisor"
+      "v": "Fractional CTO and AI architect for AI teams"
     },
     {
       "k": "Base",
-      "v": "Delhi · UK, US and India hours"
+      "v": "Delhi · UK, European and US-morning hours"
     }
   ],
   "still_running": [
@@ -47,5 +95,61 @@
       "detail": "side project, still answering",
       "since": "2016-10"
     }
-  ]
+  ],
+  "_still_running_note": "No longer drawn (2 Nov 2026): the Shiprocket and ValueLabs rows were restricted claims (claims-and-stats.md). Kept for the record.",
+  "social": {
+    "site": {
+      "label": "Website",
+      "sub": "msingh.com"
+    },
+    "linkedin": {
+      "label": "LinkedIn",
+      "sub": "in/mesingh9"
+    },
+    "x": {
+      "label": "X",
+      "sub": "@meSingh9"
+    }
+  },
+  "terms": [
+    "AGENTIC SYSTEMS",
+    "RAG ARCHITECTURE",
+    "REAL-TIME VOICE",
+    "MULTI-AGENT ORCHESTRATION",
+    "MCP",
+    "EVAL HARNESSES",
+    "CONTEXT ENGINEERING",
+    "GUARDRAILS",
+    "INFERENCE COST",
+    "LLMOPS"
+  ],
+  "stack": {
+    "_note": "The layers of an AI system as I architect them, top to bottom. Replaces the four résumé columns (3 Nov).",
+    "layers": [
+      {
+        "h": "Product and release",
+        "items": [
+          "Release gates, enterprise answers, cost per task"
+        ]
+      },
+      {
+        "h": "Orchestration",
+        "items": [
+          "Agents and multi-agent systems, MCP tool layers, memory"
+        ]
+      },
+      {
+        "h": "Retrieval and context",
+        "items": [
+          "RAG pipelines, context engineering, eval harnesses"
+        ]
+      },
+      {
+        "h": "Models and voice",
+        "items": [
+          "Streaming speech, voice cloning, model routing, guardrails"
+        ]
+      }
+    ]
+  }
 }
