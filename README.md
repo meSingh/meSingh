@@ -8,11 +8,11 @@ I design the AI systems companies run their business on, and I stay until they r
 
 The work is agents, retrieval and real-time voice, with the evals, guardrails and cost controls that keep them standing once real users arrive. The part I care about is the part after the first result: the agent that still has to answer well with partial tool failures, in languages the evals never covered, under a budget. Right now that work is at [TWINii](https://twinii.ai), where we build real-time AI twins of real experts, and with a small number of teams I join part-time, embedded.
 
-<a href="https://msingh.com/how-i-help"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/offers-tickets-dark.svg"><img alt="How I can help: start with a call, one engagement, on your team" src="assets/offers-tickets.svg" width="100%"></picture></a>
+<a href="https://msingh.com/how-i-help?utm_source=github&utm_medium=profile&utm_campaign=github-readme&utm_content=offers-card"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/offers-tickets-dark.svg"><img alt="How I can help: start with a call, one engagement, on your team" src="assets/offers-tickets.svg" width="100%"></picture></a>
 
 <p>
-  <a href="https://msingh.com/connect-with-me"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/button-call-dark.svg"><img alt="Book a 20-minute call" src="assets/button-call.svg" height="52"></picture></a>&nbsp;&nbsp;
-  <a href="https://msingh.com/how-i-help"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/button-help-dark.svg"><img alt="How I can help" src="assets/button-help.svg" height="52"></picture></a>
+  <a href="https://msingh.com/connect-with-me?utm_source=github&utm_medium=profile&utm_campaign=github-readme&utm_content=call-button"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/button-call-dark.svg"><img alt="Book a 20-minute call" src="assets/button-call.svg" height="52"></picture></a>&nbsp;&nbsp;
+  <a href="https://msingh.com/how-i-help?utm_source=github&utm_medium=profile&utm_campaign=github-readme&utm_content=help-button"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/button-help-dark.svg"><img alt="How I can help" src="assets/button-help.svg" height="52"></picture></a>
 </p>
 
 **Lately, I've been working on**
@@ -37,7 +37,7 @@ The work is agents, retrieval and real-time voice, with the evals, guardrails an
 - **Balluun:** five years as Solutions Architect for a Silicon Valley B2B market network, through its cloud-native migration.
 
 <p>
-  <a href="https://msingh.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/social-site-dark.svg"><img alt="msingh.com" src="assets/social-site.svg" height="48"></picture></a>&nbsp;
+  <a href="https://msingh.com/?utm_source=github&utm_medium=profile&utm_campaign=github-readme&utm_content=website-button"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/social-site-dark.svg"><img alt="msingh.com" src="assets/social-site.svg" height="48"></picture></a>&nbsp;
   <a href="https://www.linkedin.com/in/mesingh9/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/social-linkedin-dark.svg"><img alt="LinkedIn, in/mesingh9" src="assets/social-linkedin.svg" height="48"></picture></a>&nbsp;
   <a href="https://x.com/meSingh9"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/social-x-dark.svg"><img alt="X, @meSingh9" src="assets/social-x.svg" height="48"></picture></a>
 </p>
@@ -60,4 +60,4 @@ The work is agents, retrieval and real-time voice, with the evals, guardrails an
 <img alt="Cal.com" src="https://img.shields.io/badge/Cal.com-555555?style=flat-square&logo=caldotcom&logoColor=white" />
 </p>
 
-<p><sub>Mandeep Singh &nbsp;·&nbsp; Delhi, India &nbsp;·&nbsp; <a href="https://msingh.com">msingh.com</a> &nbsp;·&nbsp; the strips update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>
+<p><sub>Mandeep Singh &nbsp;·&nbsp; Delhi, India &nbsp;·&nbsp; <a href="https://msingh.com/?utm_source=github&utm_medium=profile&utm_campaign=github-readme&utm_content=footer">msingh.com</a> &nbsp;·&nbsp; the strips update daily from <a href="https://github.com/meSingh/meSingh/tree/master/scripts">scripts/</a></sub></p>

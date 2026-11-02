@@ -1,6 +1,6 @@
 # GitHub profile v8.1 (3 Nov 2026, live)
 
-Then: a calendar icon on the call button and the "m." glyph on the How I can help button, which is now border only, no fill. Before that: the contribution heatmap is out of the README (still generated, with the bars, in case it returns); the three tickets share one quiet colourway, no orange first ticket.
+Then: every msingh.com link in the README carries UTM tags (`utm_source=github`, `utm_medium=profile`, `utm_campaign=github-readme`, `utm_content` = offers-card, call-button, help-button, website-button or footer). Before that: a calendar icon on the call button and the "m." glyph on the How I can help button, which is now border only, no fill. Before that: the contribution heatmap is out of the README (still generated, with the bars, in case it returns); the three tickets share one quiet colourway, no orange first ticket.
 
 # GitHub profile v8 (3 Nov 2026): tickets in, website glyph, the quiet button back
 
