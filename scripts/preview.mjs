@@ -46,7 +46,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:85%;backg
 table{border-collapse:collapse;width:100%}td{padding:0 6px 12px 0;border:0}sub{font-size:12px;color:${t.muted}}
 </style>
 <div class="wrap"><div class="side"><img src="avatar.png"><div style="font-size:24px;font-weight:600;margin-top:16px">Mandeep Singh</div><div style="font-size:20px;color:${t.muted}">meSingh</div>
-<div style="margin-top:12px">Chief Architect at TWINii. Fractional CTO and production advisor for seed to Series B AI teams. The layer after the demo.</div></div>
+<div style="margin-top:12px">Fractional CTO &amp; AI Architect | Agentic Workflows · Advanced RAG · Low-Latency Voice · Evals &amp; Guardrails · LLMOps · Token Economics | 16+ yrs, 6+ Production AI</div></div>
 <div class="card">${body}</div></div>`;
 mkdirSync('preview', { recursive: true });
 writeFileSync(`preview/${mode}.html`, html);
