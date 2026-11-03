@@ -4,7 +4,7 @@
 
 I design the AI systems companies run their business on, and I stay until they run on their own. Where AI stops being a feature and becomes a system: that is where I work.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/status-dark.svg"><img alt="16+ years shipping software, 6+ years in Production AI, currently Chief Architect at TWINii" src="assets/status.svg"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/status-dark.svg"><img alt="16+ years shipping software, 6+ years in Production AI, currently Chief AI Architect at TWINii" src="assets/status.svg"></picture>
 
 The work is agents, retrieval and real-time voice, with the evals, guardrails and cost controls that keep them standing once real users arrive. The part I care about is the part after the first result: the agent that still has to answer well with partial tool failures, in languages the evals never covered, under a budget. Right now that work is at [TWINii](https://twinii.ai), where we build real-time AI twins of real experts, and with a small number of teams I join part-time, embedded.
 
