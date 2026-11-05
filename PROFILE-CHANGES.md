@@ -1,3 +1,8 @@
+# GitHub profile v8.2 (5 Nov 2026, pushed on Mandeep's word)
+
+Lately names PolinRider Scanner, linked to polinriderscanner.com (was the old polinrider-cleaner repository link). Some of what I've built stays professional work only (Mandeep, 5 Nov 2026: no private or side projects there, so Sukhi Play was taken back out before the push). The workflow no longer runs the two summary-cards steps, whose cards the README never showed; the `profile-summary-card-output/` folder stays as it is and stops updating. Push on Mandeep's word.
+
+
 # GitHub profile v8.1 (3 Nov 2026, live)
 
 Then: every msingh.com link in the README carries UTM tags (`utm_source=github`, `utm_medium=profile`, `utm_campaign=github-readme`, `utm_content` = offers-card, call-button, help-button, website-button or footer). Before that: a calendar icon on the call button and the "m." glyph on the How I can help button, which is now border only, no fill. Before that: the contribution heatmap is out of the README (still generated, with the bars, in case it returns); the three tickets share one quiet colourway, no orange first ticket.

@@ -21,7 +21,7 @@ I move companies off brittle LLM wrappers and onto production-grade AI systems: 
 - Multi-agent orchestration and MCP tool layers that hold their shape as the number of tools grows.
 - Eval harnesses and release gates, so a model or prompt change ships with evidence rather than hope.
 - Spec-driven development with AI-assisted engineering standards, so coding agents write inside boundaries the team agreed on first.
-- Security and supply-chain hardening across an organisation. That programme is why [polinrider-cleaner](https://github.com/meSingh/polinrider-cleaner) exists.
+- Security and supply-chain hardening across an organisation. That programme is why [PolinRider Scanner](https://polinriderscanner.com) exists.
 - Inference cost. I read the token bill the way I used to read the AWS bill.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg"><img alt="The stack I architect: product and release, orchestration, retrieval and context, models and voice" src="assets/stack.svg" width="100%"></picture>
