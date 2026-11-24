@@ -1,15 +1,15 @@
 {
-  "fetched": "2026-11-23",
+  "fetched": "2026-11-24",
   "scope": "private",
   "createdAt": "2012-09-18",
-  "followers": 45,
+  "followers": 44,
   "publicRepos": 36,
-  "stars": 126,
+  "stars": 125,
   "forks": 43,
-  "contributions": 3963,
-  "privateContributions": 3284,
-  "commitsLastYear": 534,
-  "prsLastYear": 123,
+  "contributions": 4042,
+  "privateContributions": 3350,
+  "commitsLastYear": 541,
+  "prsLastYear": 129,
   "reviewsLastYear": 0,
   "reposContributed": 15,
   "weeks": [
@@ -443,7 +443,7 @@
       7,
       30,
       52,
-      16
+      15
     ],
     [
       5,
@@ -469,21 +469,22 @@
       26,
       32,
       31,
-      4,
+      29,
       46
     ],
     [
       48,
-      11,
-      18,
+      14,
+      21,
       0,
       34,
-      25,
+      27,
       97
     ],
     [
       35,
-      6
+      10,
+      43
     ]
   ],
   "firstDay": "2025-11-23",
@@ -491,12 +492,12 @@
     {
       "name": "polinrider-scanner",
       "description": "Detect and clean up after the PolinRider supply-chain campaign: GitHub organizations, personal accounts and macOS, Linux and Windows machines. One binary, dry-run by default.",
-      "stars": 6,
+      "stars": 5,
       "forks": 4,
       "language": "Rust",
       "languageColor": "#dea584",
       "archived": false,
-      "pushed": "2026-11-23"
+      "pushed": "2026-11-24"
     },
     {
       "name": "git.wtf",
@@ -509,6 +510,6 @@
       "pushed": "2026-11-09"
     }
   ],
-  "allTimeCommits": 9577,
-  "allTimePRs": 700
+  "allTimeCommits": 9649,
+  "allTimePRs": 709
 }
