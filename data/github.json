@@ -1,17 +1,17 @@
 {
-  "fetched": "2026-11-26",
+  "fetched": "2026-11-27",
   "scope": "private",
   "createdAt": "2012-09-18",
   "followers": 44,
-  "publicRepos": 36,
-  "stars": 125,
-  "forks": 43,
-  "contributions": 4081,
-  "privateContributions": 3389,
-  "commitsLastYear": 541,
-  "prsLastYear": 129,
+  "publicRepos": 37,
+  "stars": 127,
+  "forks": 50,
+  "contributions": 4222,
+  "privateContributions": 3478,
+  "commitsLastYear": 572,
+  "prsLastYear": 146,
   "reviewsLastYear": 0,
-  "reposContributed": 15,
+  "reposContributed": 17,
   "weeks": [
     [
       0,
@@ -486,7 +486,8 @@
       10,
       46,
       23,
-      11
+      75,
+      77
     ]
   ],
   "firstDay": "2025-11-23",
@@ -499,7 +500,7 @@
       "language": "Rust",
       "languageColor": "#dea584",
       "archived": false,
-      "pushed": "2026-11-25"
+      "pushed": "2026-11-26"
     },
     {
       "name": "git.wtf",
@@ -512,6 +513,6 @@
       "pushed": "2026-11-09"
     }
   ],
-  "allTimeCommits": 9687,
-  "allTimePRs": 713
+  "allTimeCommits": 9804,
+  "allTimePRs": 734
 }
